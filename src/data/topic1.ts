@@ -8,18 +8,16 @@ export const topic1Tasks: Task[] = [
     title: 'Первый лог при старте SPA-приложения',
     frontendContext: '🚀 Инициализация фронтенда',
     frontendScenario: 'Когда страница интернет-магазина загружается в браузере, разработчики выводят служебное приветствие в консоль браузера, чтобы подтвердить успешную загрузку скриптов.',
-    description: 'Напишите инструкцию вывода в консоль точной строки: "Frontend App initialized successfully!". Обязательно поставьте точку с запятой в конце.',
+    description: 'Напишите инструкцию вывода в консоль точной строки: "Frontend App initialized successfully!". Обязательно поставьте точку с запятой в конце инструкции.',
     variableNamingTip: {
       recommendedName: 'appInitMessage',
+      meaning: 'текст приветственного сообщения при старте приложения',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Если вы захотите вынести текст в переменную: используем const (так как текст фиксирован) и camelCase. Первое слово пишется строчными буквами, а каждое следующее — с заглавной (app + Init + Message).'
+      why: 'Если вы выносите текст в переменную, имя пишется в стиле camelCase: первое слово со строчной буквы, а каждое следующее — с заглавной.'
     },
     syntaxTags: ['console.log()', 'инструкция', ';'],
     initialCode: `// Задача 1.1: Инициализация фронтенда
-// Напишите команду вывода в консоль строки: "Frontend App initialized successfully!"
-
-// Напишите ваш код ниже:
+// Напишите команду вывода в консоль строки "Frontend App initialized successfully!":
 
 `,
     solutionCode: `console.log("Frontend App initialized successfully!");`,
@@ -74,19 +72,16 @@ export const topic1Tasks: Task[] = [
     title: 'Проверка версии окружения сборщика',
     frontendContext: '🛠️ Node.js и CI/CD пайплайн',
     frontendScenario: 'Перед сборкой проекта (npm run build) автоматический скрипт проверяет версию Node.js, чтобы исключить сбои зависимостей.',
-    description: 'Объявите константу nodeVersion со значением "v22.17.2". Выведите в консоль через запятую два значения: "Текущая версия Node.js:" и саму переменную nodeVersion.',
+    description: 'Создайте переменную nodeVersion, которая обозначает версию окружения Node.js, со значением "v22.17.2". Значение фиксировано и не будет меняться во время работы скрипта. Выведите в консоль через запятую пояснение "Текущая версия Node.js:" и значение переменной nodeVersion.',
     variableNamingTip: {
       recommendedName: 'nodeVersion',
+      meaning: 'версия среды выполнения Node.js',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Для начинающих: если значение переменной не должно меняться в процессе программы, ВСЕГДА пишите const, а не let. Имя nodeVersion в стиле camelCase наглядно отражает версию Node.js.'
+      why: 'Имя переменной состоит из названия платформы node и сущности Version в стиле camelCase. Подумайте, какое ключевое слово выбрать для значения, которое никогда не меняется.'
     },
-    syntaxTags: ['console.log() через запятую', 'const', 'camelCase'],
+    syntaxTags: ['console.log() через запятую', 'const / let', 'camelCase'],
     initialCode: `// Задача 1.2: Проверка версии Node.js
-// 1. Создайте константу nodeVersion со значением "v22.17.2"
-// 2. Выведите в консоль через запятую: "Текущая версия Node.js:", nodeVersion
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const nodeVersion = "v22.17.2";
@@ -96,14 +91,14 @@ console.log("Текущая версия Node.js:", nodeVersion);`,
     testCases: [
       {
         id: 't1-2-c1',
-        title: 'Объявление переменной nodeVersion через const',
-        expected: 'const nodeVersion = "v22.17.2"',
+        title: 'Объявление переменной nodeVersion',
+        expected: 'Объявление переменной nodeVersion',
         validate: (_, code) => {
-          const isConst = /const\s+nodeVersion\s*=/.test(code);
+          const hasDecl = /(?:const|let)\s+nodeVersion\s*=/.test(code);
           return {
-            passed: isConst,
-            actual: isConst ? 'const nodeVersion объявлена' : 'nodeVersion не объявлена через const',
-            message: isConst ? 'Переменная объявлена правильно' : 'Объявите константу: const nodeVersion = "v22.17.2";'
+            passed: hasDecl,
+            actual: hasDecl ? 'Переменная nodeVersion объявлена' : 'nodeVersion не объявлена',
+            message: hasDecl ? 'Переменная объявлена правильно' : 'Не найдено объявление переменной nodeVersion'
           };
         }
       },
@@ -129,21 +124,16 @@ console.log("Текущая версия Node.js:", nodeVersion);`,
     title: 'Логирование параметров сетевого запроса',
     frontendContext: '🌐 Логирование HTTP-запроса',
     frontendScenario: 'Фронтенд запрашивает каталог товаров. Для отладки сетевых запросов разработчики выводят метод, путь и статус ответа в одну строку.',
-    description: 'Выведите в одну строку через запятую три аргумента: строковый префикс "[HTTP]", путь "GET /api/products" и числовой статус 200.',
+    description: 'Выведите в консоль одной инструкцией через запятую три значения: строковый тег "[HTTP]", путь к ресурсу "GET /api/products" и числовой статус ответа 200.',
     variableNamingTip: {
       recommendedName: 'httpStatusCode',
+      meaning: 'числовой код ответа HTTP-сервера',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Числовые коды HTTP ответов называют httpStatus или statusCode. Суффикс Code ясно дает понять, что значение — целое число.'
+      why: 'Числовые коды обычно снабжают суффиксом Code (statusCode, errorCode), что подчеркивает их числовую природу.'
     },
     syntaxTags: ['console.log(a, b, c)', 'несколько аргументов'],
     initialCode: `// Задача 1.3: Логирование сетевого запроса
-// Выведите в консоль три аргумента через запятую:
-// 1) "[HTTP]"
-// 2) "GET /api/products"
-// 3) 200
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `console.log("[HTTP]", "GET /api/products", 200);`,
@@ -172,19 +162,16 @@ console.log("Текущая версия Node.js:", nodeVersion);`,
     title: 'Приветствие пользователя в DevTools',
     frontendContext: '👤 Личный кабинет покупателя',
     frontendScenario: 'После авторизации в консоль для удобства тестировщика выводится имя пользователя.',
-    description: 'Создайте константу userName со значением "Алексей". Выведите через запятую два параметра: "Пользователь вошел в систему:" и саму переменную userName.',
+    description: 'Создайте переменную userName, которая обозначает имя авторизованного пользователя, со значением "Алексей". Выведите через запятую текст "Пользователь вошел в систему:" и саму переменную userName.',
     variableNamingTip: {
       recommendedName: 'userName',
+      meaning: 'имя текущего пользователя в системе',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Почему userName, а не просто user или name? Потому что user обычно обозначает весь объект со всеми данными (email, id, avatar), а name слишком абстрактно. userName — идеально точное имя.'
+      why: 'Имя userName точнее, чем просто name или user, так как user часто означает весь объект пользователя с почтой и настройками.'
     },
-    syntaxTags: ['const', 'console.log()', 'camelCase'],
+    syntaxTags: ['переменные', 'console.log()', 'camelCase'],
     initialCode: `// Задача 1.4: Приветствие пользователя
-// 1. Создайте константу userName со значением "Алексей"
-// 2. Выведите в консоль: "Пользователь вошел в систему:", userName
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const userName = "Алексей";
@@ -194,14 +181,14 @@ console.log("Пользователь вошел в систему:", userName);
     testCases: [
       {
         id: 't1-4-c1',
-        title: 'Использование const и переменной userName',
-        expected: 'const userName = "Алексей"',
+        title: 'Объявление переменной userName',
+        expected: 'Объявление userName со значением "Алексей"',
         validate: (_, code) => {
-          const hasVar = /const\s+userName\s*=/.test(code);
+          const hasVar = /(?:const|let)\s+userName\s*=/.test(code);
           return {
             passed: hasVar,
-            actual: hasVar ? 'userName объявлен через const' : 'userName не найден',
-            message: hasVar ? 'Переменная объявлена правильно' : 'Объявите: const userName = "Алексей";'
+            actual: hasVar ? 'userName объявлен' : 'userName не найден',
+            message: hasVar ? 'Переменная объявлена правильно' : 'Не найдено объявление переменной userName'
           };
         }
       },
@@ -227,19 +214,16 @@ console.log("Пользователь вошел в систему:", userName);
     title: 'Очистка консоли перед новым логом',
     frontendContext: '🧹 Чистота терминала и логов',
     frontendScenario: 'В методичке (стр. 10–11) подчеркивается важность очистки консоли. Метод console.clear() очищает забитый экран перед выводом новых важных данных.',
-    description: 'Вызовите метод очистки консоли console.clear(), а затем выведите сообщение "Консоль очищена для нового сеанса".',
+    description: 'Очистите консоль браузера с помощью специального метода консоли, а затем выведите сообщение "Консоль очищена для нового сеанса".',
     variableNamingTip: {
       recommendedName: 'sessionState',
+      meaning: 'состояние текущего сеанса пользователя',
       style: 'camelCase',
-      keyword: 'const',
       why: 'Для действий в JavaScript используют глаголы (clear, log, render), а для хранения данных — существительные (session, message).'
     },
     syntaxTags: ['console.clear()', 'console.log()'],
     initialCode: `// Задача 1.5: Очистка консоли
-// 1. Вызовите console.clear();
-// 2. Выведите сообщение "Консоль очищена для нового сеанса"
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `console.clear();
@@ -256,7 +240,7 @@ console.log("Консоль очищена для нового сеанса");`,
           return {
             passed: hasClear,
             actual: hasClear ? 'console.clear() вызван' : 'console.clear() не найден',
-            message: hasClear ? 'Метод очистки найден' : 'Вызовите команду console.clear();'
+            message: hasClear ? 'Метод очистки найден' : 'Вызовите метод очистки консоли console.clear()'
           };
         }
       },
@@ -282,19 +266,16 @@ console.log("Консоль очищена для нового сеанса");`,
     title: 'Имитация alert-уведомления браузера',
     frontendContext: '🔔 Браузерные модальные окна',
     frontendScenario: 'В методичке (стр. 11) рассмотрено выполнение команды alert("Hello") в консоли браузера. В веб-приложениях предупреждающие сообщения привлекают мгновенное внимание.',
-    description: 'Создайте константу alertMessage со строкой "Внимание: несохраненные изменения!". Выведите её в консоль с префиксом "[ALERT]" через запятую.',
+    description: 'Создайте переменную alertMessage, которая обозначает текст предупреждения пользователю о несохраненных данных, со значением "Внимание: несохраненные изменения!". Выведите её в консоль с префиксом "[ALERT]" через запятую.',
     variableNamingTip: {
       recommendedName: 'alertMessage',
+      meaning: 'текст предупреждающего сообщения',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Суффикс Message (alertMessage, errorMessage, successMessage) прямо говорит о том, что переменная хранит готовый для пользователя текст.'
+      why: 'Суффикс Message (alertMessage, errorMessage) прямо говорит о том, что переменная хранит готовый для пользователя текст.'
     },
-    syntaxTags: ['alertMessage', 'const', 'console.log()'],
-    initialCode: `// Задача 1.6: Предупреждение
-// 1. Создайте константу alertMessage со значением "Внимание: несохраненные изменения!"
-// 2. Выведите в консоль: "[ALERT]", alertMessage
-
-// Напишите ваш код ниже:
+    syntaxTags: ['alertMessage', 'console.log()', 'camelCase'],
+    initialCode: `// Задача 1.6: Предупреждение пользователю
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const alertMessage = "Внимание: несохраненные изменения!";
@@ -305,13 +286,13 @@ console.log("[ALERT]", alertMessage);`,
       {
         id: 't1-6-c1',
         title: 'Объявление переменной alertMessage',
-        expected: 'const alertMessage = "Внимание: несохраненные изменения!"',
+        expected: 'Объявление alertMessage',
         validate: (_, code) => {
-          const hasConst = /const\s+alertMessage\s*=/.test(code);
+          const hasDecl = /(?:const|let)\s+alertMessage\s*=/.test(code);
           return {
-            passed: hasConst,
-            actual: hasConst ? 'alertMessage объявлена' : 'alertMessage не найдена',
-            message: hasConst ? 'Переменная объявлена правильно' : 'Создайте: const alertMessage = "Внимание: несохраненные изменения!";'
+            passed: hasDecl,
+            actual: hasDecl ? 'alertMessage объявлена' : 'alertMessage не найдена',
+            message: hasDecl ? 'Переменная объявлена правильно' : 'Создайте переменную alertMessage'
           };
         }
       },
@@ -337,21 +318,16 @@ console.log("[ALERT]", alertMessage);`,
     title: 'Отслеживание этапов сборки пакетов npm',
     frontendContext: '📦 Менеджер пакетов npm',
     frontendScenario: 'При выполнении команды npm install скрипт выводит имя этапа и статус готовности.',
-    description: 'Напишите три последовательных вызова console.log: 1) "1. Скачивание пакетов...", 2) "2. Аудит безопасности...", 3) "3. Пакеты установлены!".',
+    description: 'Напишите три последовательных вывода в консоль для каждого этапа: 1) "1. Скачивание пакетов...", 2) "2. Аудит безопасности...", 3) "3. Пакеты установлены!".',
     variableNamingTip: {
       recommendedName: 'buildStep',
+      meaning: 'текущий порядковый номер шага сборки',
       style: 'camelCase',
-      keyword: 'let',
-      why: 'Если номер шага инкрементируется во время сборки, переменную шага называют buildStep или currentStep через let.'
+      why: 'Если номер шага изменяется во время сборки, переменную шага называют buildStep или currentStep.'
     },
     syntaxTags: ['последовательность инструкций', 'npm', 'console.log()'],
     initialCode: `// Задача 1.7: Этапы установки пакетов
-// Выведите три последовательных сообщения:
-// 1) "1. Скачивание пакетов..."
-// 2) "2. Аудит безопасности..."
-// 3) "3. Пакеты установлены!"
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `console.log("1. Скачивание пакетов...");
@@ -398,20 +374,16 @@ console.log("3. Пакеты установлены!");`,
     title: 'Мониторинг времени отрисовки (Render Time)',
     frontendContext: '⚡ Метрики Core Web Vitals',
     frontendScenario: 'Фронтенд-инженеры замеряют скорость рендеринга страницы. Выведем название компонента и затраченные миллисекунды.',
-    description: 'Создайте componentName со значением "ProductList" и renderTimeMs со значением 14.5. Выведите: "Компонент:", componentName, "отрисован за:", renderTimeMs, "мс".',
+    description: 'Создайте переменную componentName, которая обозначает название компонента, со значением "ProductList", и переменную renderTimeMs, которая обозначает время отрисовки в миллисекундах, со значением 14.5. Выведите в консоль через запятую: "Компонент:", componentName, "отрисован за:", renderTimeMs, "мс".',
     variableNamingTip: {
       recommendedName: 'renderTimeMs',
+      meaning: 'время рендеринга компонента в миллисекундах',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Добавление суффикса единиц измерения (Ms, Px, Sec) — профессиональный стандарт фронтенда. Сразу ясно, что 14.5 — это миллисекунды, а не секунды.'
+      why: 'Добавление суффикса единиц измерения (Ms, Px, Sec) — профессиональный стандарт: сразу ясно, в каких единицах хранится число.'
     },
-    syntaxTags: ['console.log(5 аргументов)', 'суффикс единицы измерения', 'const'],
+    syntaxTags: ['console.log(аргументы)', 'суффикс единицы измерения', 'camelCase'],
     initialCode: `// Задача 1.8: Замер времени рендеринга
-// 1. Создайте const componentName = "ProductList";
-// 2. Создайте const renderTimeMs = 14.5;
-// 3. Выведите в консоль: "Компонент:", componentName, "отрисован за:", renderTimeMs, "мс"
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const componentName = "ProductList";
@@ -423,15 +395,15 @@ console.log("Компонент:", componentName, "отрисован за:", re
       {
         id: 't1-8-c1',
         title: 'Объявление componentName и renderTimeMs',
-        expected: 'Обе переменные объявлены через const',
+        expected: 'Объявление обеих переменных',
         validate: (_, code) => {
-          const hasName = /const\s+componentName\s*=/.test(code);
-          const hasTime = /const\s+renderTimeMs\s*=/.test(code);
+          const hasName = /(?:const|let)\s+componentName\s*=/.test(code);
+          const hasTime = /(?:const|let)\s+renderTimeMs\s*=/.test(code);
           const ok = hasName && hasTime;
           return {
             passed: ok,
-            actual: ok ? 'Переменные объявлены' : 'Не найдены const componentName или renderTimeMs',
-            message: ok ? 'Имена и ключевые слова верны' : 'Объявите обе переменные через const'
+            actual: ok ? 'Переменные объявлены' : 'Не найдены componentName или renderTimeMs',
+            message: ok ? 'Имена переменных верны' : 'Создайте переменные componentName и renderTimeMs'
           };
         }
       },
@@ -457,20 +429,16 @@ console.log("Компонент:", componentName, "отрисован за:", re
     title: 'Логирование ошибки валидации поля формы',
     frontendContext: '⚠️ Обработка ошибок в форме регистрации',
     frontendScenario: 'Когда пользователь вводит некорректный email, фронтенд логирует код ошибки и подсказку.',
-    description: 'Создайте errorCode со значением 422 и errorMessage со значением "Email введен некорректно". Выведите их через запятую с префиксом "[ERROR]".',
+    description: 'Создайте переменную errorCode, которая обозначает числовой статус ошибки, со значением 422, и переменную errorMessage, которая обозначает понятный пользователю текст ошибки, со значением "Email введен некорректно". Выведите их через запятую с префиксом "[ERROR]".',
     variableNamingTip: {
       recommendedName: 'errorCode / errorMessage',
+      meaning: 'числовой код и текстовое описание ошибки валидации',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Слово code означает числовой статус, message — текст. Разделение сущностей исключает путаницу в коде.'
+      why: 'Слово code означает числовой статус, message — текст. Разделение понятий исключает путаницу в коде.'
     },
-    syntaxTags: ['const', 'отладка ошибок', 'console.log()'],
-    initialCode: `// Задача 1.9: Ошибка валидации
-// 1. Создайте const errorCode = 422;
-// 2. Создайте const errorMessage = "Email введен некорректно";
-// 3. Выведите: "[ERROR]", errorCode, errorMessage
-
-// Напишите ваш код ниже:
+    syntaxTags: ['переменные', 'отладка ошибок', 'console.log()'],
+    initialCode: `// Задача 1.9: Ошибка валидации формы
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const errorCode = 422;
@@ -481,16 +449,16 @@ console.log("[ERROR]", errorCode, errorMessage);`,
     testCases: [
       {
         id: 't1-9-c1',
-        title: 'Объявление errorCode и errorMessage через const',
-        expected: 'const errorCode = 422 и const errorMessage = ...',
+        title: 'Объявление errorCode и errorMessage',
+        expected: 'Объявление обеих переменных',
         validate: (_, code) => {
-          const hasCode = /const\s+errorCode\s*=/.test(code);
-          const hasMsg = /const\s+errorMessage\s*=/.test(code);
+          const hasCode = /(?:const|let)\s+errorCode\s*=/.test(code);
+          const hasMsg = /(?:const|let)\s+errorMessage\s*=/.test(code);
           const ok = hasCode && hasMsg;
           return {
             passed: ok,
-            actual: ok ? 'Переменные объявлены' : 'Не найдены константы errorCode или errorMessage',
-            message: ok ? 'Константы объявлены верно' : 'Используйте const для errorCode и errorMessage'
+            actual: ok ? 'Переменные объявлены' : 'Не найдены errorCode или errorMessage',
+            message: ok ? 'Переменные объявлены верно' : 'Создайте переменные errorCode и errorMessage'
           };
         }
       },
@@ -516,20 +484,16 @@ console.log("[ERROR]", errorCode, errorMessage);`,
     title: 'Сводка сборщика бандла в терминале',
     frontendContext: '📦 Итог процесса сборки (Build Summary)',
     frontendScenario: 'После компиляции бандла терминал выводит строчку с итоговым размером бандла и временем сборки.',
-    description: 'Создайте константы bundleSize со значением "142 kB" и buildDuration со значением "1.2s". Выведите: "Сборка завершена:", bundleSize, "за", buildDuration.',
+    description: 'Создайте переменную bundleSize, которая обозначает размер готового файла, со значением "142 kB", и переменную buildDuration, которая обозначает затраченное время, со значением "1.2s". Выведите в консоль через запятую: "Сборка завершена:", bundleSize, "за", buildDuration.',
     variableNamingTip: {
       recommendedName: 'bundleSize / buildDuration',
+      meaning: 'размер собранного файла и время выполнения сборки',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Имена bundleSize и buildDuration самодокументируемы: размер бандла и длительность сборки.'
+      why: 'Имена bundleSize и buildDuration самодокументируемы: по названию сразу ясно, что именно лежит внутри.'
     },
-    syntaxTags: ['console.log()', 'const', 'camelCase'],
+    syntaxTags: ['console.log()', 'camelCase', 'строковые переменные'],
     initialCode: `// Задача 1.10: Сводка сборки
-// 1. Создайте const bundleSize = "142 kB";
-// 2. Создайте const buildDuration = "1.2s";
-// 3. Выведите: "Сборка завершена:", bundleSize, "за", buildDuration
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const bundleSize = "142 kB";
@@ -541,15 +505,15 @@ console.log("Сборка завершена:", bundleSize, "за", buildDuratio
       {
         id: 't1-10-c1',
         title: 'Объявление bundleSize и buildDuration',
-        expected: 'Обе переменные объявлены через const',
+        expected: 'Объявление bundleSize и buildDuration',
         validate: (_, code) => {
-          const hasSize = /const\s+bundleSize\s*=/.test(code);
-          const hasDur = /const\s+buildDuration\s*=/.test(code);
+          const hasSize = /(?:const|let)\s+bundleSize\s*=/.test(code);
+          const hasDur = /(?:const|let)\s+buildDuration\s*=/.test(code);
           const ok = hasSize && hasDur;
           return {
             passed: ok,
-            actual: ok ? 'Константы объявлены' : 'Проверьте объявление bundleSize и buildDuration',
-            message: ok ? 'Константы объявлены верно' : 'Создайте: const bundleSize = "142 kB"; const buildDuration = "1.2s";'
+            actual: ok ? 'Переменные объявлены' : 'Проверьте объявление bundleSize и buildDuration',
+            message: ok ? 'Переменные объявлены верно' : 'Создайте переменные bundleSize и buildDuration'
           };
         }
       },

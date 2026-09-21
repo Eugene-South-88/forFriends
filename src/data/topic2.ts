@@ -8,19 +8,16 @@ export const topic2Tasks: Task[] = [
     title: 'Глобальная конфигурация API в UPPER_SNAKE_CASE',
     frontendContext: '⚙️ Конфигурация клиента API',
     frontendScenario: 'В продакшн-приложениях базовый URL бэкенда задается как неизменяемая константа на уровне модуля, известная до запуска программы.',
-    description: 'Создайте константу API_BASE_URL со значением "https://api.shop.com/v1". Выведите её значение в консоль с префиксом "API Endpoint:".',
+    description: 'Создайте переменную API_BASE_URL, которая обозначает базовый веб-адрес бэкенд-сервера, со значением "https://api.shop.com/v1". Поскольку это глобальная настройка, которая никогда не должна меняться во время работы приложения, используйте подходящий способ объявления и стиль именования. Выведите в консоль текст "API Endpoint:" и значение переменной API_BASE_URL.',
     variableNamingTip: {
       recommendedName: 'API_BASE_URL',
+      meaning: 'базовый адрес API бэкенда приложения',
       style: 'UPPER_SNAKE_CASE',
-      keyword: 'const',
-      why: 'В JavaScript константы, чьи значения жестко зафиксированы разработчиком ДО старта программы (настройки, URL бэкенда, секретные ключи), принято называть ЗАГЛАВНЫМИ БУКВАМИ через подчеркивание (UPPER_SNAKE_CASE). Используем const, чтобы никто не смог её случайно перезаписать.'
+      why: 'В JavaScript глобальные настройки и константы, известные до запуска программы, принято называть заглавными буквами с подчеркиванием (UPPER_SNAKE_CASE).'
     },
-    syntaxTags: ['const', 'UPPER_SNAKE_CASE', 'конфигурация'],
+    syntaxTags: ['const / let', 'UPPER_SNAKE_CASE', 'конфигурация'],
     initialCode: `// Задача 2.1: Конфигурация API
-// 1. Создайте константу API_BASE_URL со значением "https://api.shop.com/v1"
-// 2. Выведите в консоль: "API Endpoint:", API_BASE_URL
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const API_BASE_URL = "https://api.shop.com/v1";
@@ -30,14 +27,14 @@ console.log("API Endpoint:", API_BASE_URL);`,
     testCases: [
       {
         id: 't2-1-c1',
-        title: 'Использование const и стиля UPPER_SNAKE_CASE',
-        expected: 'const API_BASE_URL = "https://api.shop.com/v1"',
+        title: 'Объявление переменной API_BASE_URL через const',
+        expected: 'Объявление API_BASE_URL через const',
         validate: (_, code) => {
           const hasConst = /const\s+API_BASE_URL\s*=/.test(code);
           return {
             passed: hasConst,
             actual: hasConst ? 'const API_BASE_URL объявлена' : 'Не найдена const API_BASE_URL',
-            message: hasConst ? 'Константа объявлена верно' : 'Используйте const API_BASE_URL = "https://api.shop.com/v1";'
+            message: hasConst ? 'Константа объявлена верно' : 'Не найдено объявление константы API_BASE_URL'
           };
         }
       },
@@ -63,20 +60,16 @@ console.log("API Endpoint:", API_BASE_URL);`,
     title: 'Счётчик товаров в корзине (мутабельная переменная)',
     frontendContext: '🛒 Состояние корзины интернет-магазина',
     frontendScenario: 'Пользователь кликает "Добавить в корзину", и количество товаров увеличивается. Значение переменной должно изменяться по ходу работы интерфейса.',
-    description: 'Объявите переменную cartItemsCount с начальным значением 0 через let. Затем измените её значение на 3 и выведите: "Товаров в корзине:", cartItemsCount.',
+    description: 'Создайте переменную cartItemsCount, которая обозначает количество товаров в корзине покупок, с начальным значением 0. Затем, имитируя добавление товаров покупателем, измените значение переменной cartItemsCount на 3. Выведите в консоль текст "Товаров в корзине:" и итоговое значение cartItemsCount.',
     variableNamingTip: {
       recommendedName: 'cartItemsCount',
+      meaning: 'количество добавленных в корзину товаров',
       style: 'camelCase',
-      keyword: 'let',
-      why: 'Используем let, так как значение будет меняться при кликах. Название camelCase начинается с существительного контекста (cart), уточняется сущностью (Items) и числовым суффиксом (Count).'
+      why: 'Подумайте, какое ключевое слово нужно выбрать, если переменной предстоит перезапись нового значения.'
     },
-    syntaxTags: ['let', 'изменение переменной', 'camelCase'],
+    syntaxTags: ['изменение переменной', 'переприсваивание', 'camelCase'],
     initialCode: `// Задача 2.2: Счётчик корзины
-// 1. Создайте изменяемую переменную cartItemsCount с начальным значением 0 (используйте let!)
-// 2. Переприсвойте cartItemsCount значение 3
-// 3. Выведите: "Товаров в корзине:", cartItemsCount
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `let cartItemsCount = 0;
@@ -87,27 +80,27 @@ console.log("Товаров в корзине:", cartItemsCount);`,
     testCases: [
       {
         id: 't2-2-c1',
-        title: 'Объявление через let (не const и не var)',
-        expected: 'let cartItemsCount = 0',
+        title: 'Объявление переменной cartItemsCount через let',
+        expected: 'let cartItemsCount',
         validate: (_, code) => {
           const hasLet = /let\s+cartItemsCount\s*=/.test(code);
           return {
             passed: hasLet,
             actual: hasLet ? 'let cartItemsCount найден' : 'cartItemsCount не объявлен через let',
-            message: hasLet ? 'Использован let для изменяемой переменной' : 'Объявите: let cartItemsCount = 0;'
+            message: hasLet ? 'Использован let для изменяемой переменной' : 'Переменная cartItemsCount должна быть объявлена через let, так как её значение меняется'
           };
         }
       },
       {
         id: 't2-2-c2',
         title: 'Переприсваивание нового значения 3',
-        expected: 'cartItemsCount = 3 в коде',
+        expected: 'Присваивание cartItemsCount нового значения 3',
         validate: (_, code) => {
           const hasReassign = /cartItemsCount\s*=\s*3/.test(code);
           return {
             passed: hasReassign,
             actual: hasReassign ? 'Значение 3 присвоено' : 'Не найдено переприсваивание cartItemsCount = 3',
-            message: hasReassign ? 'Переменная обновлена' : 'Добавьте: cartItemsCount = 3;'
+            message: hasReassign ? 'Переменная обновлена' : 'Не найдена операция перезаписи переменной cartItemsCount значением 3'
           };
         }
       },
@@ -133,21 +126,16 @@ console.log("Товаров в корзине:", cartItemsCount);`,
     title: 'Регистрозависимость в стейте авторизации',
     frontendContext: '🔐 Контроль доступа и роли пользователей',
     frontendScenario: 'В JS переменные role, Role и ROLE — это три совершенно разные ячейки памяти. Ошибка в регистре может привести к уязвимости в правах доступа.',
-    description: 'Объявите три разные переменные: role = "guest", Role = "editor", ROLE = "admin". Выведите их в консоль через запятую.',
+    description: 'Создайте три отдельные переменные с именами role, Role и ROLE, которые обозначают роли пользователей в системе с разным регистром символов: в role поместите значение "guest", в Role — значение "editor", а в ROLE — значение "admin". Выведите все три переменные в консоль через запятую.',
     variableNamingTip: {
-      recommendedName: 'userRole',
+      recommendedName: 'role / Role / ROLE',
+      meaning: 'три разные переменные роли пользователя с разным регистром букв',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Чтобы не путаться в похожих словах, в реальном проекте дают понятные уникальные имена. Но помнить о чувствительности JS к регистру обязан каждый веб-разработчик.'
+      why: 'JavaScript строго чувствителен к регистру букв. Переменные с одинаковыми буквами в разном регистре являются абсолютно независимыми.'
     },
-    syntaxTags: ['регистрозависимость', 'let / const', 'синтаксис'],
+    syntaxTags: ['регистрозависимость', 'чувствительность к регистру', 'синтаксис'],
     initialCode: `// Задача 2.3: Регистрозависимость
-// 1. Создайте const role = "guest";
-// 2. Создайте const Role = "editor";
-// 3. Создайте const ROLE = "admin";
-// 4. Выведите все три переменные в console.log через запятую
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const role = "guest";
@@ -160,7 +148,7 @@ console.log(role, Role, ROLE);`,
       {
         id: 't2-3-c1',
         title: 'Объявление всех трех переменных с разным регистром',
-        expected: 'role, Role и ROLE в коде',
+        expected: 'Объявление role, Role и ROLE',
         validate: (_, code) => {
           const has1 = /\brole\s*=/.test(code);
           const has2 = /\bRole\s*=/.test(code);
@@ -169,7 +157,7 @@ console.log(role, Role, ROLE);`,
           return {
             passed: ok,
             actual: ok ? 'Все три переменные объявлены' : 'Не найдены переменные role, Role или ROLE',
-            message: ok ? 'Регистрозависимость соблюдена' : 'Объявите role, Role и ROLE'
+            message: ok ? 'Регистрозависимость соблюдена' : 'Проверьте объявление трех переменных: role, Role и ROLE'
           };
         }
       },
@@ -195,19 +183,16 @@ console.log(role, Role, ROLE);`,
     title: 'Защита неизменяемого ID пользователя через const',
     frontendContext: '🆔 Идентификатор сессии',
     frontendScenario: 'ID пользователя выдается сервером один раз при входе и не должен меняться на клиенте. Защитим его через const.',
-    description: 'Создайте константу userId со значением "usr_9981". Выведите "Пользователь ID зафиксирован:", userId.',
+    description: 'Создайте переменную userId, которая обозначает постоянный идентификатор сессии пользователя, со значением "usr_9981". Поскольку этот идентификатор не должен быть перезаписан, используйте ключевое слово для неизменяемых переменных. Выведите в консоль текст "Пользователь ID зафиксирован:" и значение переменной userId.',
     variableNamingTip: {
       recommendedName: 'userId',
+      meaning: 'неизменяемый идентификатор сессии пользователя',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'userId пишется в camelCase, так как это локальная runtime-константа конкретного пользователя (в отличие от хардкодных глобальных настроек вроде API_BASE_URL). Ключевое слово const защищает от случайного изменения.'
+      why: 'userId пишется в camelCase. Подумайте, какое ключевое слово защищает переменную от повторного присваивания.'
     },
-    syntaxTags: ['const', 'защита от перезаписи', 'TypeError'],
+    syntaxTags: ['const / let', 'неизменяемость', 'camelCase'],
     initialCode: `// Задача 2.4: Защита ID константой
-// 1. Создайте константу userId со значением "usr_9981"
-// 2. Выведите: "Пользователь ID зафиксирован:", userId
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const userId = "usr_9981";
@@ -218,13 +203,13 @@ console.log("Пользователь ID зафиксирован:", userId);`,
       {
         id: 't2-4-c1',
         title: 'Использование const для userId',
-        expected: 'const userId = "usr_9981"',
+        expected: 'userId объявлена через const',
         validate: (_, code) => {
           const hasConst = /const\s+userId\s*=/.test(code);
           return {
             passed: hasConst,
             actual: hasConst ? 'const userId найден' : 'userId не объявлен через const',
-            message: hasConst ? 'Использован const' : 'Объявите: const userId = "usr_9981";'
+            message: hasConst ? 'Использован const' : 'Переменная userId должна быть объявлена через const'
           };
         }
       },
@@ -250,20 +235,16 @@ console.log("Пользователь ID зафиксирован:", userId);`,
     title: 'Блочная область видимости в модальном окне',
     frontendContext: '📦 Изоляция временных переменных в блоках',
     frontendScenario: 'Внутри блока условия или модального окна создается временная переменная modalTitle. Благодаря блочной видимости let/const она не засоряет глобальный код.',
-    description: 'Создайте блок с фигурными скобками { }. Внутри блока объявите const modalTitle = "Подтверждение оплаты"; и выведите её внутри этого блока.',
+    description: 'Создайте изолированный блок кода с помощью фигурных скобок { }. Внутри блока создайте переменную modalTitle, которая обозначает заголовок всплывающего модального окна, со значением "Подтверждение оплаты". Внутри этого же блока выведите в консоль текст "Внутри блока:" и значение переменной modalTitle.',
     variableNamingTip: {
       recommendedName: 'modalTitle',
+      meaning: 'заголовок всплывающего модального окна',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Имя состоит из контекста (modal) и сущности (Title). Блочная область видимости гарантирует, что переменная исчезнет из памяти после закрытия блока {}.'
+      why: 'Имя состоит из контекста (modal) и сущности (Title). Блочная область видимости гарантирует, что переменная доступна только внутри блока {}.'
     },
-    syntaxTags: ['фигурные скобки {}', 'block scope', 'let / const'],
+    syntaxTags: ['фигурные скобки {}', 'блочная видимость', 'область видимости'],
     initialCode: `// Задача 2.5: Блочная область видимости
-// 1. Откройте и закройте фигурные скобки блока: { }
-// 2. Внутри блока создайте: const modalTitle = "Подтверждение оплаты";
-// 3. Внутри блока выведите: "Внутри блока:", modalTitle
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `{
@@ -278,11 +259,11 @@ console.log("Пользователь ID зафиксирован:", userId);`,
         title: 'Наличие блока фигурных скобок { }',
         expected: 'Блок { ... } с объявлением modalTitle',
         validate: (_, code) => {
-          const hasBlock = /\{\s*[\s\S]*const\s+modalTitle[\s\S]*\}/.test(code);
+          const hasBlock = /\{\s*[\s\S]*(?:const|let)\s+modalTitle[\s\S]*\}/.test(code);
           return {
             passed: hasBlock,
             actual: hasBlock ? 'Блок {} найден' : 'Блок {} с переменной modalTitle не обнаружен',
-            message: hasBlock ? 'Фигурные скобки блока оформлены верно' : 'Оберните объявление в блок: { const modalTitle = ... }'
+            message: hasBlock ? 'Фигурные скобки блока оформлены верно' : 'Оберните объявление и вывод переменной modalTitle в блок фигурных скобок { }'
           };
         }
       },
@@ -308,19 +289,16 @@ console.log("Пользователь ID зафиксирован:", userId);`,
     title: 'Почему мы НЕ используем устаревший var: утечка из блока',
     frontendContext: '⚠️ Рефакторинг легаси-кода',
     frontendScenario: 'В старом коде переменная var "пробивает" фигурные скобки обычного блока {} (нет блочной видимости), что часто приводило к багам перезаписи.',
-    description: 'Внутри блока { } объявите var legacyPromo = "DISCOUNT20";. Выведите значение переменной СНАРУЖИ этого блока, чтобы увидеть утечку var.',
+    description: 'Создайте блок кода с фигурными скобками { }. Внутри блока создайте переменную legacyPromo, которая обозначает устаревший промокод скидки, со значением "DISCOUNT20", используя устаревшее ключевое слово var. Снаружи блока (после закрывающей скобки }) выведите в консоль текст "Утечка var снаружи блока:" и значение переменной legacyPromo.',
     variableNamingTip: {
       recommendedName: 'legacyPromo',
+      meaning: 'устаревший промокод скидки из старого кода',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'В современном фронтенде ВСЕГДА используем const или let. Переменная var не чувствует фигурные скобки блоков, поэтому от неё отказались с приходом ES6.'
+      why: 'В современном JavaScript всегда используют const или let. Переменная var игнорирует фигурные скобки обычных блоков, что и демонстрирует этот пример.'
     },
-    syntaxTags: ['var', 'function scope vs block scope', 'утечка переменных'],
+    syntaxTags: ['var', 'утечка переменных', 'легаси'],
     initialCode: `// Задача 2.6: Утечка var из блока
-// 1. Создайте блок { } и объявите внутри: var legacyPromo = "DISCOUNT20";
-// 2. СНАРУЖИ блока (после закрывающей скобки }) выведите: "Утечка var снаружи блока:", legacyPromo
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `{
@@ -333,13 +311,13 @@ console.log("Утечка var снаружи блока:", legacyPromo);`,
       {
         id: 't2-6-c1',
         title: 'Объявление var legacyPromo внутри блока',
-        expected: '{ var legacyPromo = "DISCOUNT20"; }',
+        expected: 'Объявление var legacyPromo внутри блока {}',
         validate: (_, code) => {
           const hasVarInBlock = /\{\s*[\s\S]*var\s+legacyPromo\s*=/.test(code);
           return {
             passed: hasVarInBlock,
             actual: hasVarInBlock ? 'var в блоке найден' : 'var legacyPromo внутри {} не найден',
-            message: hasVarInBlock ? 'Объявление var выполнено' : 'Создайте блок: { var legacyPromo = "DISCOUNT20"; }'
+            message: hasVarInBlock ? 'Объявление var выполнено' : 'Не найдено объявление var legacyPromo внутри блока {}'
           };
         }
       },
@@ -365,20 +343,16 @@ console.log("Утечка var снаружи блока:", legacyPromo);`,
     title: 'Документирование кода: однострочные и многострочные комментарии',
     frontendContext: '📝 Командная разработка и Code Review',
     frontendScenario: 'Фронтендер оставляет комментарии к логике расчета стоимости товара, чтобы коллеги понимали назначение переменных.',
-    description: 'Напишите многострочный комментарий /* ... */ с текстом "Расчет стоимости", создайте const productPrice = 1200; с однострочным комментарием // в рублях, и выведите: "Цена товара:", productPrice.',
+    description: 'Напишите многострочный комментарий с текстом "Расчет стоимости". Создайте переменную productPrice, которая обозначает цену товара в каталоге, со значением 1200 и добавьте в той же строке однострочный комментарий с текстом "в рублях". Выведите в консоль текст "Цена товара:" и значение переменной productPrice.',
     variableNamingTip: {
       recommendedName: 'productPrice',
+      meaning: 'базовая цена товара в рублях',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Имя productPrice однозначно указывает на цену товара. Если цена со скидкой — discountedProductPrice.'
+      why: 'Имя productPrice однозначно указывает на сущность и её денежное свойство.'
     },
-    syntaxTags: ['// однострочный комментарий', '/* многострочный */', 'чистота кода'],
+    syntaxTags: ['однострочные комментарии', 'многострочные комментарии', 'чистота кода'],
     initialCode: `// Задача 2.7: Комментарии
-// 1. Добавьте многострочный комментарий /* Расчет стоимости */
-// 2. Создайте: const productPrice = 1200; // в рублях
-// 3. Выведите: "Цена товара:", productPrice
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `/* Расчет стоимости */
@@ -390,13 +364,13 @@ console.log("Цена товара:", productPrice);`,
       {
         id: 't2-7-c1',
         title: 'Наличие многострочного комментария /* ... */',
-        expected: 'Многострочный комментарий в коде',
+        expected: 'Многострочный комментарий /* Расчет стоимости */',
         validate: (_, code) => {
           const hasMulti = /\/\*[\s\S]*\*\//.test(code);
           return {
             passed: hasMulti,
             actual: hasMulti ? 'Многострочный комментарий найден' : 'Многострочный комментарий не найден',
-            message: hasMulti ? 'Синтаксис /* */ корректен' : 'Добавьте: /* Расчет стоимости */'
+            message: hasMulti ? 'Синтаксис /* */ корректен' : 'Добавьте многострочный комментарий: /* Расчет стоимости */'
           };
         }
       },
@@ -422,20 +396,16 @@ console.log("Цена товара:", productPrice);`,
     title: 'Правила допустимых символов: $ и _ в именах переменных',
     frontendContext: '⚛️ Фреймворки и приватные переменные',
     frontendScenario: 'В React/RxJS и фронтенд-библиотеках знак $ часто обозначает стримы данных, а _ — внутренние или приватные переменные.',
-    description: 'Объявите две переменные: const $streamId = 101; и const _cachedToken = "tk_abc";. Выведите их через запятую с пояснениями: "Stream:", $streamId, "Cache:", _cachedToken.',
+    description: 'Создайте переменную $streamId, которая обозначает поток данных с сервера, со значением 101, и переменную _cachedToken, которая обозначает приватный кэшированный токен, со значением "tk_abc". Выведите в консоль через запятую: "Stream:", $streamId, "Cache:", _cachedToken.',
     variableNamingTip: {
       recommendedName: '$streamId / _cachedToken',
+      meaning: 'переменные с разрешенными спецсимволами $ и _ в начале имени',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Имена переменных в JS могут начинаться с букв (a-z), а также со знаков $ и _. Но цифра не может стоять первой (1stream — фатальная ошибка!).'
+      why: 'Имена идентификаторов в JavaScript могут начинаться с букв латиницы, знака доллара ($) и подчеркивания (_), но не могут начинаться с цифры.'
     },
-    syntaxTags: ['символы $ и _', 'правила имен', 'спецсимволы'],
+    syntaxTags: ['символы $ и _', 'правила имен', 'идентификаторы'],
     initialCode: `// Задача 2.8: Символы $ и _
-// 1. Создайте const $streamId = 101;
-// 2. Создайте const _cachedToken = "tk_abc";
-// 3. Выведите: "Stream:", $streamId, "Cache:", _cachedToken
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const $streamId = 101;
@@ -447,15 +417,15 @@ console.log("Stream:", $streamId, "Cache:", _cachedToken);`,
       {
         id: 't2-8-c1',
         title: 'Объявление переменных со знаками $ и _',
-        expected: 'const $streamId и const _cachedToken',
+        expected: 'Объявление $streamId и _cachedToken',
         validate: (_, code) => {
-          const hasDollar = /const\s+\$streamId\s*=/.test(code);
-          const hasUnder = /const\s+_cachedToken\s*=/.test(code);
+          const hasDollar = /(?:const|let)\s+\$streamId\s*=/.test(code);
+          const hasUnder = /(?:const|let)\s+_cachedToken\s*=/.test(code);
           const ok = hasDollar && hasUnder;
           return {
             passed: ok,
             actual: ok ? 'Обе переменные найдены' : 'Проверьте имена $streamId и _cachedToken',
-            message: ok ? 'Спецсимволы применены верно' : 'Создайте const $streamId = 101; и const _cachedToken = "tk_abc";'
+            message: ok ? 'Спецсимволы применены верно' : 'Создайте переменные $streamId со значением 101 и _cachedToken со значением "tk_abc"'
           };
         }
       },
@@ -481,20 +451,16 @@ console.log("Stream:", $streamId, "Cache:", _cachedToken);`,
     title: 'Флаг загрузки кнопки (состояние Loading State)',
     frontendContext: '⏳ Асинхронные операции в интерфейсе',
     frontendScenario: 'Когда пользователь нажимает "Оплатить", кнопка переходит в состояние загрузки (показывается спиннер), а после ответа сервера — обратно.',
-    description: 'Объявите let isLoading = false;. Затем измените его на true (клик по кнопке) и выведите: "Состояние кнопки:", isLoading.',
+    description: 'Создайте переменную isLoading, которая обозначает признак процесса загрузки данных на кнопке, с начальным значением false. Затем, имитируя клик пользователя и начало отправки формы, измените значение переменной isLoading на true. Выведите в консоль текст "Состояние кнопки:" и обновленное значение переменной.',
     variableNamingTip: {
       recommendedName: 'isLoading',
+      meaning: 'булев флаг текущего процесса сетевой загрузки кнопки',
       style: 'camelCase',
-      keyword: 'let',
-      why: 'Булевы флаги во фронтенде ВСЕГДА называют с глагольных приставок: is (isLoading, isVisible), has (hasError), can (canSubmit). Стиль — camelCase, ключевое слово — let (так как флаг переключается).'
+      why: 'Булевы флаги во фронтенде принято называть с глагольных приставок (is, has, can). Подумайте, какое ключевое слово объявления использовать для изменяющегося флага.'
     },
-    syntaxTags: ['let', 'булев флаг', 'префиксы is/has'],
+    syntaxTags: ['булев флаг', 'переприсваивание', 'префикс is'],
     initialCode: `// Задача 2.9: Флаг загрузки кнопки
-// 1. Создайте let isLoading = false;
-// 2. Измените значение isLoading на true
-// 3. Выведите: "Состояние кнопки:", isLoading
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `let isLoading = false;
@@ -506,26 +472,26 @@ console.log("Состояние кнопки:", isLoading);`,
       {
         id: 't2-9-c1',
         title: 'Объявление isLoading через let',
-        expected: 'let isLoading = false',
+        expected: 'let isLoading',
         validate: (_, code) => {
           const hasLet = /let\s+isLoading\s*=/.test(code);
           return {
             passed: hasLet,
             actual: hasLet ? 'let isLoading найден' : 'isLoading не объявлен через let',
-            message: hasLet ? 'Использован let для флага' : 'Объявите: let isLoading = false;'
+            message: hasLet ? 'Использован let для флага' : 'Переменная isLoading должна быть объявлена через let, так как её значение меняется'
           };
         }
       },
       {
         id: 't2-9-c2',
         title: 'Переключение в true',
-        expected: 'isLoading = true в коде',
+        expected: 'Присваивание переменной значения true',
         validate: (_, code) => {
           const hasTrue = /isLoading\s*=\s*true/.test(code);
           return {
             passed: hasTrue,
             actual: hasTrue ? 'Значение true присвоено' : 'Не найдено isLoading = true',
-            message: hasTrue ? 'Флаг переключен' : 'Добавьте строку: isLoading = true;'
+            message: hasTrue ? 'Флаг переключен' : 'Присвойте переменной новое значение: isLoading = true;'
           };
         }
       },
@@ -551,19 +517,16 @@ console.log("Состояние кнопки:", isLoading);`,
     title: 'Запрещенные ключевые слова в именах переменных',
     frontendContext: '🚫 Защита от синтаксических ошибок',
     frontendScenario: 'Разработчик пытается назвать переменную class (в HTML это CSS-класс), но в JS слово class зарезервировано под создание классов ООП.',
-    description: 'Задайте CSS-класс кнопки через правильное имя buttonClassName = "btn-primary"; и выведите: "Класс элемента:", buttonClassName.',
+    description: 'Создайте переменную buttonClassName, которая обозначает CSS-стиль оформления кнопки, со значением "btn-primary". Помните, что слово class зарезервировано в языке JavaScript. Выведите в консоль текст "Класс элемента:" и значение переменной buttonClassName.',
     variableNamingTip: {
       recommendedName: 'buttonClassName',
+      meaning: 'название CSS-класса для стилизации кнопки',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Нельзя называть переменные словами языка: let, const, class, return, function. Поэтому в React свойство называется className, а переменные стилей — buttonClassName или itemClass.'
+      why: 'Слова let, const, class, return зарезервированы JavaScript. Поэтому для стилей используют составные имена: buttonClassName или alertClass.'
     },
-    syntaxTags: ['зарезервированные слова', 'className', 'правила синтаксиса'],
+    syntaxTags: ['зарезервированные слова', 'className', 'именование'],
     initialCode: `// Задача 2.10: Корректное имя для CSS-класса
-// 1. Создайте const buttonClassName = "btn-primary";
-// 2. Выведите: "Класс элемента:", buttonClassName
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const buttonClassName = "btn-primary";
@@ -573,14 +536,14 @@ console.log("Класс элемента:", buttonClassName);`,
     testCases: [
       {
         id: 't2-10-c1',
-        title: 'Объявление buttonClassName (не class)',
-        expected: 'const buttonClassName = "btn-primary"',
+        title: 'Объявление переменной buttonClassName',
+        expected: 'Объявление buttonClassName со значением "btn-primary"',
         validate: (_, code) => {
-          const hasName = /const\s+buttonClassName\s*=/.test(code);
+          const hasName = /(?:const|let)\s+buttonClassName\s*=/.test(code);
           return {
             passed: hasName,
             actual: hasName ? 'buttonClassName объявлена' : 'Переменная buttonClassName не найдена',
-            message: hasName ? 'Имя выбрано корректно' : 'Объявите: const buttonClassName = "btn-primary";'
+            message: hasName ? 'Имя выбрано корректно' : 'Создайте переменную buttonClassName со значением "btn-primary"'
           };
         }
       },

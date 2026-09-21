@@ -148,27 +148,28 @@ export const TaskCard: React.FC<TaskCardProps> = ({
           {task.description}
         </div>
 
-        {/* Variable Naming Guidance (Crucial for beginners) */}
+        {/* Variable Naming Guidance */}
         <div className="p-4 bg-amber-50/90 border border-amber-300 rounded-lg text-sm text-amber-950 space-y-2">
           <div className="flex items-center justify-between flex-wrap gap-2">
             <div className="flex items-center gap-1.5 font-bold text-amber-900">
               <Sparkles className="w-4.5 h-4.5 text-amber-600 shrink-0" />
-              <span>💡 Подсказка для начинающего: как назвать переменную и почему</span>
+              <span>💡 Переменные задачи и стиль именования</span>
             </div>
             <span className="text-xs font-semibold px-2 py-0.5 rounded bg-amber-200/70 text-amber-900 border border-amber-300">
-              {task.variableNamingTip.style}
+              Стиль: {task.variableNamingTip.style}
             </span>
           </div>
 
           <div className="flex items-center gap-2 flex-wrap pt-0.5">
-            <span className="text-xs text-amber-800 font-medium">Рекомендуемое имя:</span>
+            <span className="text-xs text-amber-800 font-medium">Переменная:</span>
             <code className="px-2 py-0.5 bg-white text-amber-950 rounded-md font-mono text-xs font-bold border border-amber-300 shadow-2xs">
               {task.variableNamingTip.recommendedName}
             </code>
-            <span className="text-xs text-amber-800 font-medium">Ключевое слово:</span>
-            <span className="text-xs font-bold font-mono px-2 py-0.5 rounded-md bg-amber-100 text-amber-900 border border-amber-200">
-              {task.variableNamingTip.keyword}
-            </span>
+            {task.variableNamingTip.meaning && (
+              <span className="text-xs text-amber-900 font-medium">
+                — {task.variableNamingTip.meaning}
+              </span>
+            )}
           </div>
 
           <p className="text-xs sm:text-sm text-amber-950 leading-relaxed pt-1">

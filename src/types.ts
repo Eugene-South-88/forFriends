@@ -3,7 +3,8 @@ export type TopicId = 1 | 2 | 3 | 4 | 5;
 export interface VariableNamingTip {
   recommendedName: string;
   style: 'camelCase' | 'UPPER_SNAKE_CASE';
-  keyword: 'const' | 'let' | 'const / let';
+  meaning?: string;
+  keyword?: 'const' | 'let' | 'const / let';
   why: string;
 }
 

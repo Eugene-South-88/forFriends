@@ -8,20 +8,16 @@ export const topic3Tasks: Task[] = [
     title: 'Валидация типов ответа бэкенда через typeof',
     frontendContext: '📡 Проверка данных от API (Runtime Type Check)',
     frontendScenario: 'Фронтенд получил с бэкенда объект пользователя. Перед рендерингом нужно убедиться, что возраст пришел числом, а имя — строкой.',
-    description: 'Создайте age = 28 и userName = "Мария". Выведите через console.log типы обеих переменных, используя оператор typeof.',
+    description: 'Создайте переменную age, которая обозначает возраст пользователя, со значением 28, и переменную userName, которая обозначает имя пользователя, со значением "Мария". Выведите в консоль через пробел типы обеих переменных, применив оператор typeof к каждой из них.',
     variableNamingTip: {
-      recommendedName: 'userAge / userName',
+      recommendedName: 'age / userName',
+      meaning: 'возраст и имя пользователя для проверки типов',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Для начинающих: оператор typeof пишется перед переменной через пробел (typeof age). Переменные неизменны, поэтому используем const.'
+      why: 'Оператор typeof возвращает строку с именем типа операнда. Используйте подходящие ключевые слова для неизменяемых переменных.'
     },
     syntaxTags: ['typeof', 'number', 'string'],
     initialCode: `// Задача 3.1: Проверка типов с typeof
-// 1. Создайте const age = 28;
-// 2. Создайте const userName = "Мария";
-// 3. Выведите типы обеих переменных через typeof в одном console.log: console.log(typeof age, typeof userName);
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const age = 28;
@@ -39,7 +35,7 @@ console.log(typeof age, typeof userName);`,
           return {
             passed: hasTypeof,
             actual: hasTypeof ? 'Оператор typeof применен' : 'Оператор typeof не найден для обеих переменных',
-            message: hasTypeof ? 'Синтаксис typeof верен' : 'Напишите: console.log(typeof age, typeof userName);'
+            message: hasTypeof ? 'Синтаксис typeof верен' : 'Примените оператор typeof к переменным age и userName'
           };
         }
       },
@@ -65,20 +61,16 @@ console.log(typeof age, typeof userName);`,
     title: 'Разница между undefined и null в профиле пользователя',
     frontendContext: '👤 Состояние профиля: не назначено vs намеренно пусто',
     frontendScenario: 'В UI undefined означает, что поле еще не инициализировано, а null — что аватар пользователя намеренно отсутствует (пользователь не загрузил фото).',
-    description: 'Объявите let unassignedRole; (будет undefined) и const avatarUrl = null;. Выведите значения обеих переменных и оператор typeof для avatarUrl (обратите внимание на особенность "object").',
+    description: 'Создайте переменную unassignedRole, которая обозначает еще не назначенную роль пользователя, без начального значения (чтобы она получила undefined). Затем создайте переменную avatarUrl, которая обозначает ссылку на аватарку, со значением явного отсутствия данных null. Выведите в консоль через пробел: значение unassignedRole, значение avatarUrl и тип данных avatarUrl с помощью оператора typeof.',
     variableNamingTip: {
-      recommendedName: 'avatarUrl / unassignedRole',
+      recommendedName: 'unassignedRole / avatarUrl',
+      meaning: 'неинициализированное значение и явное пустое значение null',
       style: 'camelCase',
-      keyword: 'const / let',
-      why: 'unassignedRole объявляется через let без начального значения (поэтому получает undefined). avatarUrl объявляется через const = null (явное отсутствие объекта).'
+      why: 'Переменная без начального значения может быть объявлена только через let. Для явного пустого значения используют null.'
     },
     syntaxTags: ['undefined', 'null', 'typeof null'],
     initialCode: `// Задача 3.2: undefined и null
-// 1. Объявите: let unassignedRole;
-// 2. Объявите: const avatarUrl = null;
-// 3. Выведите все три значения: unassignedRole, avatarUrl, typeof avatarUrl
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `let unassignedRole;
@@ -90,7 +82,7 @@ console.log(unassignedRole, avatarUrl, typeof avatarUrl);`,
       {
         id: 't3-2-c1',
         title: 'Объявление неинициализированной переменной и null',
-        expected: 'let unassignedRole; и const avatarUrl = null;',
+        expected: 'Объявление unassignedRole без значения и avatarUrl со значением null',
         validate: (_, code) => {
           const hasUnassigned = /let\s+unassignedRole\s*;/.test(code);
           const hasNull = /avatarUrl\s*=\s*null/.test(code);
@@ -98,7 +90,7 @@ console.log(unassignedRole, avatarUrl, typeof avatarUrl);`,
           return {
             passed: ok,
             actual: ok ? 'Обе переменные объявлены' : 'Проверьте объявление unassignedRole и avatarUrl',
-            message: ok ? 'undefined и null объявлены верно' : 'Создайте: let unassignedRole; const avatarUrl = null;'
+            message: ok ? 'undefined и null объявлены верно' : 'Объявите unassignedRole через let без значения и avatarUrl со значением null'
           };
         }
       },
@@ -124,20 +116,16 @@ console.log(unassignedRole, avatarUrl, typeof avatarUrl);`,
     title: 'Быстрое приведение ввода формы к числу через унарный плюс (+)',
     frontendContext: '📝 Получение чисел из HTML полей формы (<input>)',
     frontendScenario: 'Значения из input[type="text"] всегда приходят строкой. Унарный плюс + перед строкой — самый быстрый способ преобразовать её в число.',
-    description: 'Дана строка const inputPrice = "450";. Преобразуйте её в число с помощью унарного плюса +inputPrice и сохраните в priceNumber. Выведите полученное число и его typeof.',
+    description: 'Создайте переменную inputPrice, которая обозначает текстовую цену из поля ввода, со строковым значением "450". Преобразуйте эту строку в число с помощью унарного плюса (+) и сохраните в переменную priceNumber. Выведите полученное число и его тип данных через typeof.',
     variableNamingTip: {
-      recommendedName: 'priceNumber',
+      recommendedName: 'inputPrice / priceNumber',
+      meaning: 'строковая цена из поля ввода и преобразованная числовая цена',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Преобразуя inputPrice в число, новую переменную называют price или priceNumber, чтобы в коде было очевидно изменение типа с текста на число.'
+      why: 'Преобразуя inputPrice в число, новую переменную называют priceNumber, подчеркивая смену типа данных.'
     },
     syntaxTags: ['унарный плюс +', 'явное приведение', 'typeof'],
     initialCode: `// Задача 3.3: Унарный плюс (+)
-// 1. Создайте const inputPrice = "450";
-// 2. Преобразуйте строку в число с помощью унарного плюса: const priceNumber = +inputPrice;
-// 3. Выведите: priceNumber, typeof priceNumber
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const inputPrice = "450";
@@ -149,13 +137,13 @@ console.log(priceNumber, typeof priceNumber);`,
       {
         id: 't3-3-c1',
         title: 'Использование унарного плюса +inputPrice',
-        expected: '+inputPrice в объявлении priceNumber',
+        expected: 'Преобразование +inputPrice',
         validate: (_, code) => {
           const hasUnary = /\+\s*inputPrice/.test(code);
           return {
             passed: hasUnary,
             actual: hasUnary ? 'Унарный плюс найден' : 'Унарный плюс +inputPrice не найден',
-            message: hasUnary ? 'Унарный плюс применен верно' : 'Напишите: const priceNumber = +inputPrice;'
+            message: hasUnary ? 'Унарный плюс применен верно' : 'Используйте унарный плюс перед inputPrice для преобразования строки в число'
           };
         }
       },
@@ -181,19 +169,16 @@ console.log(priceNumber, typeof priceNumber);`,
     title: 'Защита от Infinity при расчете цены за клик (CPC)',
     frontendContext: '📊 Маркетинговая аналитика рекламных кампаний',
     frontendScenario: 'При делении бюджета на 0 кликов в JS получается Infinity, а не авария программы. Фронтенд должен понимать природу этого значения.',
-    description: 'Вычислите деление 1000 / 0. Сохраните в const costPerClick, выведите результат и его тип данных через typeof costPerClick.',
+    description: 'Создайте переменную costPerClick, которая обозначает расчет стоимости одного клика, и запишите в нее результат деления числа 1000 на 0. Выведите в консоль через пробел значение переменной costPerClick и её тип данных с помощью typeof.',
     variableNamingTip: {
       recommendedName: 'costPerClick',
+      meaning: 'стоимость одного клика рекламной кампании',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'В веб-маркетинге метрика Cost Per Click всегда сокращается или называется costPerClick. Стиль camelCase, keyword — const.'
+      why: 'В аналитике метрику Cost Per Click называют costPerClick. Подумайте, какой тип возвращает typeof для Infinity.'
     },
     syntaxTags: ['Infinity', 'деление на 0', 'typeof'],
     initialCode: `// Задача 3.4: Бесконечность Infinity
-// 1. Создайте const costPerClick = 1000 / 0;
-// 2. Выведите в консоль: costPerClick, typeof costPerClick
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const costPerClick = 1000 / 0;
@@ -204,13 +189,13 @@ console.log(costPerClick, typeof costPerClick);`,
       {
         id: 't3-4-c1',
         title: 'Вычисление деления на 0',
-        expected: '1000 / 0 в коде',
+        expected: 'Деление числа 1000 на 0',
         validate: (_, code) => {
           const hasDivZero = /\/\s*0/.test(code);
           return {
             passed: hasDivZero,
             actual: hasDivZero ? 'Деление на 0 найдено' : 'Деление на 0 не обнаружено',
-            message: hasDivZero ? 'Операция верна' : 'Напишите: const costPerClick = 1000 / 0;'
+            message: hasDivZero ? 'Операция верна' : 'Выполните деление 1000 / 0'
           };
         }
       },
@@ -236,19 +221,16 @@ console.log(costPerClick, typeof costPerClick);`,
     title: 'Феномен NaN и мем baNaNa из методички МФТИ',
     frontendContext: '⚠️ Поиск ошибок математических операций (Not a Number)',
     frontendScenario: 'В методичке МФТИ (стр. 31) подробно разобран пример "baNaNa", когда попытка привести букву "a" к числу через унарный плюс возвращает NaN.',
-    description: 'Выведите результат выражения \'b\' + \'a\' + + \'a\' + \'a\', а на следующей строке выведите: "Тип NaN:", typeof NaN.',
+    description: 'Выведите в консоль результат выражения сложения строк и унарного плюса: \'b\' + \'a\' + + \'a\' + \'a\'. На следующей строке выведите текст "Тип NaN:" и тип специального значения NaN через оператор typeof.',
     variableNamingTip: {
       recommendedName: 'invalidNumberResult',
+      meaning: 'результат некорректного математического вычисления',
       style: 'camelCase',
-      keyword: 'const',
       why: 'NaN ("Not a Number") возникает при математических операциях с нечисловыми данными. Важнейший факт: typeof NaN возвращает "number"!'
     },
     syntaxTags: ['NaN', 'baNaNa', 'typeof NaN'],
     initialCode: `// Задача 3.5: Мем baNaNa
-// 1. Выведите результат: console.log('b' + 'a' + + 'a' + 'a');
-// 2. Выведите тип NaN: console.log("Тип NaN:", typeof NaN);
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `console.log('b' + 'a' + + 'a' + 'a');
@@ -291,19 +273,16 @@ console.log("Тип NaN:", typeof NaN);`,
     title: 'Большие идентификаторы транзакций через BigInt',
     frontendContext: '💳 Платежный шлюз и финтех-транзакции',
     frontendScenario: 'Идентификаторы транзакций в банках превышают 2^53 - 1. Для них в JS создан тип данных BigInt, обозначаемый суффиксом n.',
-    description: 'Создайте константу orderTransactionId со значением 9007199254740995n (с буквой n в конце). Выведите значение и typeof orderTransactionId.',
+    description: 'Создайте переменную orderTransactionId, которая обозначает сверхбольшой номер банковской транзакции, со значением 9007199254740995n (с суффиксом n на конце). Выведите в консоль через пробел значение переменной orderTransactionId и её тип данных через typeof.',
     variableNamingTip: {
       recommendedName: 'orderTransactionId',
+      meaning: 'идентификатор банковской транзакции типа BigInt',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Составное имя order + Transaction + Id указывает на конкретный финансовый ордер. Суффикс Id стандартен для первичных ключей.'
+      why: 'Составное имя order + Transaction + Id указывает на финансовую операцию. Суффикс n в конце числа делает его типом bigint.'
     },
     syntaxTags: ['BigInt', 'суффикс n', 'typeof'],
     initialCode: `// Задача 3.6: BigInt
-// 1. Создайте const orderTransactionId = 9007199254740995n; (обратите внимание на n в конце!)
-// 2. Выведите: orderTransactionId, typeof orderTransactionId
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const orderTransactionId = 9007199254740995n;
@@ -320,7 +299,7 @@ console.log(orderTransactionId, typeof orderTransactionId);`,
           return {
             passed: hasBigInt,
             actual: hasBigInt ? 'Суффикс n найден' : 'Число с суффиксом n не найдено',
-            message: hasBigInt ? 'BigInt синтаксис корректен' : 'Объявите: const orderTransactionId = 9007199254740995n;'
+            message: hasBigInt ? 'BigInt синтаксис корректен' : 'Укажите число с суффиксом n: 9007199254740995n'
           };
         }
       },
@@ -346,19 +325,16 @@ console.log(orderTransactionId, typeof orderTransactionId);`,
     title: 'Уникальные скрытые ключи через Symbol',
     frontendContext: '⚛️ Внутренние уникальные метаданные компонентов',
     frontendScenario: 'В UI-библиотеках Symbol используется для создания скрытых уникальных ключей, гарантированно защищенных от коллизий имен.',
-    description: 'Создайте символ const internalId = Symbol("componentId");. Выведите его описание internalId.description и тип typeof internalId.',
+    description: 'Создайте переменную internalId, которая обозначает уникальный ключ компонента, вызвав функцию создания символа Symbol со строковым описанием "componentId". Выведите в консоль текстовое описание символа через свойство description и его тип данных с помощью typeof.',
     variableNamingTip: {
       recommendedName: 'internalId',
+      meaning: 'уникальный символ-идентификатор компонента',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Слово internal сигнализирует коллегам, что это внутренний служебный идентификатор. Символ неизменяем — пишем const.'
+      why: 'Слово internal сигнализирует, что это внутренний служебный ключ. Symbol создает уникальное значение.'
     },
     syntaxTags: ['Symbol()', 'уникальные ключи', 'typeof'],
     initialCode: `// Задача 3.7: Примитив Symbol
-// 1. Создайте const internalId = Symbol("componentId");
-// 2. Выведите: internalId.description, typeof internalId
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const internalId = Symbol("componentId");
@@ -369,13 +345,13 @@ console.log(internalId.description, typeof internalId);`,
       {
         id: 't3-7-c1',
         title: 'Вызов Symbol("componentId")',
-        expected: 'const internalId = Symbol("componentId")',
+        expected: 'Создание Symbol("componentId")',
         validate: (_, code) => {
           const hasSymbol = /Symbol\s*\(\s*["']componentId["']\s*\)/.test(code);
           return {
             passed: hasSymbol,
             actual: hasSymbol ? 'Symbol создан' : 'Symbol("componentId") не найден',
-            message: hasSymbol ? 'Функция Symbol вызвана верно' : 'Создайте: const internalId = Symbol("componentId");'
+            message: hasSymbol ? 'Функция Symbol вызвана верно' : 'Вызовите Symbol("componentId")'
           };
         }
       },
@@ -401,20 +377,16 @@ console.log(internalId.description, typeof internalId);`,
     title: 'Неявное приведение: сложение vs вычитание строк',
     frontendContext: '⚠️ Ловушки вычислений размеров CSS',
     frontendScenario: 'Если вычесть из строки "50" число 20, JS неявно приведет строку к числу (30), но при сложении выполнит строковую конкатенацию ("5020")!',
-    description: 'Вычислите const addResult = "50" + 20; и const subResult = "50" - 20;. Выведите: "Сложение:", addResult, "Вычитание:", subResult.',
+    description: 'Создайте переменную addResult, которая обозначает результат сложения строки "50" и числа 20, и переменную subResult, которая обозначает результат вычитания числа 20 из строки "50". Выведите в консоль: "Сложение:", addResult, "Вычитание:", subResult.',
     variableNamingTip: {
       recommendedName: 'addResult / subResult',
+      meaning: 'результаты сложения и вычитания со строковыми данными',
       style: 'camelCase',
-      keyword: 'const',
       why: 'Префиксы add и sub наглядно отражают проверяемые математические действия.'
     },
     syntaxTags: ['неявное приведение', 'конкатенация', 'вычитание'],
     initialCode: `// Задача 3.8: Неявное приведение (+ vs -)
-// 1. Создайте const addResult = "50" + 20;
-// 2. Создайте const subResult = "50" - 20;
-// 3. Выведите: "Сложение:", addResult, "Вычитание:", subResult
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const addResult = "50" + 20;
@@ -434,7 +406,7 @@ console.log("Сложение:", addResult, "Вычитание:", subResult);`,
           return {
             passed: ok,
             actual: ok ? 'Оба выражения присутствуют' : 'Проверьте операции "50" + 20 и "50" - 20',
-            message: ok ? 'Выражения составлены верно' : 'Объявите addResult и subResult'
+            message: ok ? 'Выражения составлены верно' : 'Вычислите выражения "50" + 20 и "50" - 20'
           };
         }
       },
@@ -460,19 +432,16 @@ console.log("Сложение:", addResult, "Вычитание:", subResult);`,
     title: 'Явное приведение к логическому типу через Boolean()',
     frontendContext: '🔘 Условный рендеринг компонентов (Truthy / Falsy)',
     frontendScenario: 'Чтобы решить, показывать ли плашку скидки, проверяют наличие промокода. Пустая строка "" дает false, а непустая — true.',
-    description: 'Преобразуйте с помощью функции Boolean() значения: "", "SALE2026", 0, 1. Выведите все 4 результата через запятую в одном console.log.',
+    description: 'Преобразуйте с помощью функции Boolean() четыре значения: пустую строку "", строку "SALE2026", число 0 и число 1. Выведите все 4 результата через запятую в одном вызове console.log.',
     variableNamingTip: {
       recommendedName: 'hasPromoCode',
+      meaning: 'булево значение наличия промокода',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Булево значение наличия промокода идеально называть hasPromoCode (вопрос "Есть ли промокод?" требует ответа да/нет: true/false).'
+      why: 'Булево значение наличия промокода называют hasPromoCode. Функция Boolean() возвращает true или false.'
     },
     syntaxTags: ['Boolean()', 'truthy / falsy', 'явное преобразование'],
     initialCode: `// Задача 3.9: Функция Boolean()
-// Выведите в консоль 4 значения через запятую:
-// Boolean(""), Boolean("SALE2026"), Boolean(0), Boolean(1)
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `console.log(Boolean(""), Boolean("SALE2026"), Boolean(0), Boolean(1));`,
@@ -501,21 +470,16 @@ console.log("Сложение:", addResult, "Вычитание:", subResult);`,
     title: 'Динамическая типизация в переменной ответа API',
     frontendContext: '🔄 Жизненный цикл загрузки данных (Pending -> Success)',
     frontendScenario: 'В JS переменная может менять тип во время работы: в момент ожидания ответа сервера apiData равна null (object), а после ответа становится строкой.',
-    description: 'Объявите let apiData = null; и выведите: "До загрузки:", typeof apiData. Затем запишите apiData = "OK"; и выведите: "После загрузки:", typeof apiData.',
+    description: 'Создайте переменную apiData, которая обозначает полученные данные API, с начальным значением null. Выведите в консоль текст "До загрузки:" и тип переменной apiData через typeof. Затем измените значение переменной apiData на строку "OK" и выведите текст "После загрузки:" и новый тип переменной apiData через typeof.',
     variableNamingTip: {
       recommendedName: 'apiData',
+      meaning: 'динамически изменяемый ответ от сервера',
       style: 'camelCase',
-      keyword: 'let',
-      why: 'Переменная объявлена через let, так как ее тип и значение динамически меняются в процессе работы скрипта.'
+      why: 'Подумайте, какое ключевое слово нужно использовать для переменной, значение и тип которой изменяются в ходе программы.'
     },
-    syntaxTags: ['динамическая типизация', 'let', 'typeof'],
+    syntaxTags: ['динамическая типизация', 'переприсваивание', 'typeof'],
     initialCode: `// Задача 3.10: Смена типа переменной
-// 1. Создайте let apiData = null;
-// 2. Выведите: "До загрузки:", typeof apiData
-// 3. Переприсвойте: apiData = "OK";
-// 4. Выведите: "После загрузки:", typeof apiData
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `let apiData = null;
@@ -528,13 +492,13 @@ console.log("После загрузки:", typeof apiData);`,
       {
         id: 't3-10-c1',
         title: 'Использование let для смены типа',
-        expected: 'let apiData = null с последующей сменой значения',
+        expected: 'Объявление apiData через let',
         validate: (_, code) => {
           const hasLet = /let\s+apiData\s*=/.test(code);
           return {
             passed: hasLet,
             actual: hasLet ? 'let apiData найден' : 'apiData не объявлена через let',
-            message: hasLet ? 'Использован let' : 'Объявите: let apiData = null;'
+            message: hasLet ? 'Использован let' : 'Переменная apiData должна быть объявлена через let, так как её значение перезаписывается'
           };
         }
       },

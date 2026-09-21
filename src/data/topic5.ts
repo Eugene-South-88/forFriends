@@ -8,22 +8,16 @@ export const topic5Tasks: Task[] = [
     title: 'Шаблонная строка личного кабинета (бэктики и ${})',
     frontendContext: '👤 Персонализированный баннер приветствия',
     frontendScenario: 'Вместо неудобного склеивания через плюсы современные фронтендеры используют шаблонные строки (обратные кавычки ` ` и интерполяцию ${}).',
-    description: 'Даны userName = "Евгений" и unreadCount = 4. Сформируйте шаблонную строку в бэктиках: `Привет, ${userName}! У вас ${unreadCount} новых уведомлений.` и выведите её.',
+    description: 'Создайте строковую переменную userName, которая обозначает имя пользователя, со значением "Евгений", и числовую переменную unreadCount, которая обозначает количество непрочитанных уведомлений, со значением 4. Сформируйте текст приветствия в переменной greetingBanner с помощью шаблонной строки в обратных кавычках (бэктиках) и интерполяции ${}: "Привет, Евгений! У вас 4 новых уведомлений." (подставив обе переменные). Выведите greetingBanner в консоль.',
     variableNamingTip: {
-      recommendedName: 'greetingBanner',
+      recommendedName: 'greetingBanner / userName / unreadCount',
+      meaning: 'текст приветствия с подстановкой имени и счетчика уведомлений',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Обратные кавычки ` ` (клавиша Ё на клавиатуре) позволяют вставлять переменные прямо внутрь строки через ${переменная}.'
+      why: 'Обратные кавычки ` ` позволяют вставлять переменные прямо внутрь строки через ${переменная}.'
     },
     syntaxTags: ['Template Literals', 'бэктики ``', 'интерполяция ${}'],
     initialCode: `// Задача 5.1: Шаблонные строки (бэктики)
-// 1. Создайте const userName = "Евгений";
-// 2. Создайте const unreadCount = 4;
-// 3. Создайте шаблонную строку в обратных кавычках:
-//    const greetingBanner = \`Привет, \${userName}! У вас \${unreadCount} новых уведомлений.\`;
-// 4. Выведите greetingBanner в консоль
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const userName = "Евгений";
@@ -36,7 +30,7 @@ console.log(greetingBanner);`,
       {
         id: 't5-1-c1',
         title: 'Использование обратных кавычек ` ` и интерполяции ${}',
-        expected: '`Привет, ${userName}! ...` в коде',
+        expected: 'Шаблонная строка с ${userName} и ${unreadCount}',
         validate: (_, code) => {
           const hasBacktick = /`[\s\S]*\$\{[\s\S]*\}/.test(code);
           return {
@@ -68,22 +62,16 @@ console.log(greetingBanner);`,
     title: 'Многострочный HTML-шаблон компонента без \\n',
     frontendContext: '📄 Генерация HTML шаблонов карточек (Template strings)',
     frontendScenario: 'В ES6 шаблонные строки в обратных кавычках сохраняют естественные переносы строк при нажатии Enter без использования \\n.',
-    description: 'Создайте многострочную строку productCardHtml в обратных кавычках:\n`<article>\n  <h2>Футболка</h2>\n</article>`\nи выведите её в консоль.',
+    description: 'Создайте переменную productCardHtml, которая обозначает фрагмент HTML-разметки карточки товара, используя многострочную шаблонную строку в обратных кавычках (бэктиках). Разметка должна содержать тег <article>, на следующей строке заголовок <h2>Футболка</h2> с отступом в два пробела, и на следующей закрывающий тег </article>. Выведите productCardHtml в консоль.',
     variableNamingTip: {
       recommendedName: 'productCardHtml',
+      meaning: 'многострочный HTML-шаблон карточки товара',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Суффикс Html сразу дает понять коллегам, что в переменной лежит фрагмент разметки.'
+      why: 'Суффикс Html сразу дает понять, что в переменной лежит фрагмент разметки.'
     },
     syntaxTags: ['многострочные строки', 'бэктики', 'HTML разметка'],
     initialCode: `// Задача 5.2: Многострочный HTML
-// 1. Создайте в обратных кавычках:
-// const productCardHtml = \`<article>
-//   <h2>Футболка</h2>
-// </article>\`;
-// 2. Выведите: console.log(productCardHtml);
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const productCardHtml = \`<article>
@@ -118,20 +106,16 @@ console.log(productCardHtml);`,
     title: 'Экранирование кавычек и обратного слеша (\\, \\\', \\\\)',
     frontendContext: '💬 Отзывы покупателей и пути к файлам компонентов',
     frontendScenario: 'Если в одинарных кавычках встречается английский апостроф (\'It\\\'s\') или путь Windows (\\), JS требует экранирования обратным слешем \\.',
-    description: 'Создайте reviewText = \'It\\\'s a great product!\' и filePath = "src\\\\components\\\\Card.tsx". Выведите обе переменные через запятую.',
+    description: 'Создайте переменную reviewText, которая обозначает отзыв покупателя, со строковым значением \'It\\\'s a great product!\', используя одинарные кавычки и символ экранирования обратным слешем (\\) перед внутренним апострофом. Затем создайте переменную filePath, которая обозначает файловый путь к компоненту, со значением "src\\\\components\\\\Card.tsx", где каждый обратный слеш экранирован. Выведите обе переменные в консоль через пробел.',
     variableNamingTip: {
       recommendedName: 'reviewText / filePath',
+      meaning: 'текст отзыва с апострофом и путь к файлу с обратными слешами',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Для текстов отзывов используют суффикс Text, для путей в файловой системе — filePath.'
+      why: 'Обратный слеш \\ экранирует следующий символ: \\\' позволяет использовать одинарную кавычку внутри одинарных, а \\\\ выводит один слеш.'
     },
     syntaxTags: ['экранирование \\', 'апостроф \\\'', 'обратный слеш \\\\'],
     initialCode: `// Задача 5.3: Экранирование спецсимволов
-// 1. Создайте: const reviewText = 'It\\'s a great product!';
-// 2. Создайте: const filePath = "src\\\\components\\\\Card.tsx";
-// 3. Выведите: console.log(reviewText, filePath);
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const reviewText = 'It\\'s a great product!';
@@ -162,19 +146,16 @@ console.log(reviewText, filePath);`,
     title: 'Валидация длины пароля через свойство .length',
     frontendContext: '🔒 Мгновенная валидация пароля в форме регистрации',
     frontendScenario: 'При вводе пароля фронтенд проверяет его длину. Если введено меньше 8 знаков, кнопка отправки остается заблокированной.',
-    description: 'Дана строка passwordInput = "secretKey99". Получите ее длину через свойство .length и выведите: "Длина пароля:", passwordInput.length, "символов".',
+    description: 'Создайте переменную passwordInput, которая обозначает введенный пользователем пароль, со значением "secretKey99". Получите количество символов в строке с помощью свойства length и выведите в консоль: "Длина пароля:", passwordInput.length, "символов".',
     variableNamingTip: {
-      recommendedName: 'passwordInput / passwordLength',
+      recommendedName: 'passwordInput',
+      meaning: 'введенный пароль для проверки длины',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Свойство .length пишется БЕЗ круглых скобок (), так как это свойство строки, а не вызываемая функция.'
+      why: 'Свойство .length пишется без круглых скобок (), так как это свойство строки, а не вызываемая функция.'
     },
     syntaxTags: ['свойство .length', 'без скобок ()', 'валидация формы'],
     initialCode: `// Задача 5.4: Свойство .length
-// 1. Создайте const passwordInput = "secretKey99";
-// 2. Выведите: "Длина пароля:", passwordInput.length, "символов"
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const passwordInput = "secretKey99";
@@ -191,7 +172,7 @@ console.log("Длина пароля:", passwordInput.length, "символов"
           return {
             passed: hasLen,
             actual: hasLen ? '.length найдено' : '.length не найдено',
-            message: hasLen ? 'Свойство длины применено' : 'Используйте passwordInput.length'
+            message: hasLen ? 'Свойство длины применено' : 'Используйте свойство length у строки passwordInput'
           };
         }
       },
@@ -217,20 +198,16 @@ console.log("Длина пароля:", passwordInput.length, "символов"
     title: 'Регистронезависимый поиск через .toLowerCase()',
     frontendContext: '🔍 Поиск по каталогу товаров (Search Input)',
     frontendScenario: 'Пользователь может ввести "MACBOOK", "Macbook" или "macbook". Чтобы товар гарантированно нашелся, поисковый запрос нормализуют методом .toLowerCase().',
-    description: 'Дана строка searchInput = "MacBook Pro". Приведите ее к нижнему регистру методом .toLowerCase() и сохраните в normalizedQuery. Выведите: "Поиск:", normalizedQuery.',
+    description: 'Создайте переменную searchInput, которая обозначает введенный текст поискового запроса, со значением "MacBook Pro". Приведите строку к нижнему регистру с помощью метода toLowerCase() и сохраните результат в переменную normalizedQuery. Выведите в консоль: "Поиск:", normalizedQuery.',
     variableNamingTip: {
-      recommendedName: 'normalizedQuery',
+      recommendedName: 'searchInput / normalizedQuery',
+      meaning: 'исходный поисковый запрос и нормализованная строка в нижнем регистре',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Слово normalized в веб-разработке означает очищенную и приведенную к общему регистру строку.'
+      why: 'Слово normalized означает строку, приведенную к единому регистру для точного сравнения.'
     },
     syntaxTags: ['.toLowerCase()', 'нормализация строк', 'поиск'],
     initialCode: `// Задача 5.5: Метод .toLowerCase()
-// 1. Создайте const searchInput = "MacBook Pro";
-// 2. Приведите к нижнему регистру: const normalizedQuery = searchInput.toLowerCase();
-// 3. Выведите: "Поиск:", normalizedQuery
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const searchInput = "MacBook Pro";
@@ -248,7 +225,7 @@ console.log("Поиск:", normalizedQuery);`,
           return {
             passed: hasLower,
             actual: hasLower ? '.toLowerCase() вызван' : '.toLowerCase() не найден',
-            message: hasLower ? 'Метод регистра применен' : 'Вызовите searchInput.toLowerCase()'
+            message: hasLower ? 'Метод регистра применен' : 'Вызовите метод toLowerCase() у searchInput'
           };
         }
       },
@@ -274,20 +251,16 @@ console.log("Поиск:", normalizedQuery);`,
     title: 'Проверка безопасного протокола через .includes()',
     frontendContext: '🛡️ Валидация внешних ссылок (HTTPS Check)',
     frontendScenario: 'Перед переходом на внешний сайт партнера фронтенд проверяет, начинается ли ссылка с безопасного протокола https://.',
-    description: 'Дана строка linkUrl = "https://safe-shop.com". Проверьте наличие подстроки "https://" методом linkUrl.includes("https://"). Сохраните в isSecure и выведите: "Безопасная ссылка:", isSecure.',
+    description: 'Создайте переменную linkUrl, которая обозначает интернет-адрес ссылки, со значением "https://safe-shop.com". Проверьте, содержит ли ссылка безопасный протокол "https://", с помощью метода includes(), и сохраните результат в переменную isSecure. Выведите в консоль: "Безопасная ссылка:", isSecure.',
     variableNamingTip: {
       recommendedName: 'isSecure',
+      meaning: 'булев флаг проверки безопасности URL',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Метод .includes() возвращает булево значение (true/false), поэтому имя переменной начинается с глагольной приставки is (isSecure).'
+      why: 'Метод .includes() возвращает true или false, поэтому имя логической переменной начинается с is.'
     },
     syntaxTags: ['.includes()', 'булев результат', 'валидация URL'],
     initialCode: `// Задача 5.6: Метод .includes()
-// 1. Создайте const linkUrl = "https://safe-shop.com";
-// 2. Проверьте: const isSecure = linkUrl.includes("https://");
-// 3. Выведите: "Безопасная ссылка:", isSecure
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const linkUrl = "https://safe-shop.com";
@@ -305,7 +278,7 @@ console.log("Безопасная ссылка:", isSecure);`,
           return {
             passed: hasInc,
             actual: hasInc ? '.includes("https://") найден' : 'Проверка .includes не найдена',
-            message: hasInc ? 'Метод .includes применен верно' : 'Вызовите linkUrl.includes("https://")'
+            message: hasInc ? 'Метод .includes применен верно' : 'Вызовите метод includes("https://")'
           };
         }
       },
@@ -331,20 +304,16 @@ console.log("Безопасная ссылка:", isSecure);`,
     title: 'Поиск позиции домена в URL через .indexOf()',
     frontendContext: '🌐 Парсинг адресов и аналитика переходов',
     frontendScenario: 'Метод .indexOf() возвращает числовую позицию первого вхождения подстроки (или -1, если совпадение не найдено).',
-    description: 'Дана строка apiUrl = "https://api.github.com/v1". Найдите индекс первого символа слова "github" методом apiUrl.indexOf("github"). Выведите: "Позиция домена:", domainIndex.',
+    description: 'Создайте переменную apiUrl, которая обозначает адрес веб-сервиса, со значением "https://api.github.com/v1". Найдите индекс первого символа слова "github" с помощью метода indexOf() и сохраните в переменную domainIndex. Выведите в консоль: "Позиция домена:", domainIndex.',
     variableNamingTip: {
       recommendedName: 'domainIndex',
+      meaning: 'числовой индекс первого символа искомой подстроки в URL',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Суффикс Index в JavaScript всегда используется для числовых позиций (0, 1, 2...).'
+      why: 'Суффикс Index всегда используется для числовых позиций в строках и массивах (0, 1, 2...).'
     },
     syntaxTags: ['.indexOf()', 'числовой индекс', 'поиск подстроки'],
     initialCode: `// Задача 5.7: Метод .indexOf()
-// 1. Создайте const apiUrl = "https://api.github.com/v1";
-// 2. Найдите индекс: const domainIndex = apiUrl.indexOf("github");
-// 3. Выведите: "Позиция домена:", domainIndex
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const apiUrl = "https://api.github.com/v1";
@@ -362,7 +331,7 @@ console.log("Позиция домена:", domainIndex);`,
           return {
             passed: hasIdx,
             actual: hasIdx ? '.indexOf("github") найден' : '.indexOf не найден',
-            message: hasIdx ? 'Метод применен' : 'Вызовите apiUrl.indexOf("github")'
+            message: hasIdx ? 'Метод применен' : 'Вызовите метод indexOf("github")'
           };
         }
       },
@@ -388,20 +357,16 @@ console.log("Позиция домена:", domainIndex);`,
     title: 'Обрезка анонса статьи в карточке через .slice()',
     frontendContext: '📰 Лента новостей блога (Text Truncation)',
     frontendScenario: 'Чтобы длинный текст статьи не ломал верстку карточки, его обрезают до первых 20 символов методом .slice(0, 20) и добавляют многоточие "...".',
-    description: 'Дана строка postText = "JavaScript — самый популярный язык веба!". Извлеките первые 20 символов методом postText.slice(0, 20) и прибавьте "...". Выведите результат.',
+    description: 'Создайте переменную postText, которая обозначает полный текст статьи блога, со значением "JavaScript — самый популярный язык веба!". Вырежьте первые 20 символов этой строки методом slice(0, 20), прибавьте в конец многоточие "..." и сохраните получившийся анонс в переменную truncatedPreview. Выведите truncatedPreview в консоль.',
     variableNamingTip: {
       recommendedName: 'truncatedPreview',
+      meaning: 'укороченный анонс статьи с многоточием на конце',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Слово truncated означает обрезанную строку, preview — текст предварительного просмотра карточки.'
+      why: 'Слово truncated означает усеченную строку, а preview — краткий анонс карточки.'
     },
     syntaxTags: ['.slice()', 'обрезка текста', 'конкатенация многоточия'],
     initialCode: `// Задача 5.8: Метод .slice()
-// 1. Создайте const postText = "JavaScript — самый популярный язык веба!";
-// 2. Обрежьте строку: const truncatedPreview = postText.slice(0, 20) + "...";
-// 3. Выведите: console.log(truncatedPreview);
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const postText = "JavaScript — самый популярный язык веба!";
@@ -419,7 +384,7 @@ console.log(truncatedPreview);`,
           return {
             passed: hasSlice,
             actual: hasSlice ? '.slice(0, 20) найден' : '.slice(0, 20) не найден',
-            message: hasSlice ? 'Метод .slice применен' : 'Напишите postText.slice(0, 20)'
+            message: hasSlice ? 'Метод .slice применен' : 'Вызовите метод slice(0, 20)'
           };
         }
       },
@@ -445,20 +410,16 @@ console.log(truncatedPreview);`,
     title: 'Подстановка процента скидки в баннер через .replace()',
     frontendContext: '🏷️ Динамические рекламные баннеры (Template Replace)',
     frontendScenario: 'Маркетологи передали шаблон акции: "Скидка: %DISCOUNT% на всё!". Фронтенд заменяет плейсхолдер %DISCOUNT% на актуальный процент акции "25%".',
-    description: 'Дана строка bannerTemplate = "Скидка: %DISCOUNT% на всё!". Замените "%DISCOUNT%" на "25%" с помощью метода .replace(). Сохраните в promoBannerText и выведите его.',
+    description: 'Создайте переменную bannerTemplate, которая обозначает текстовый шаблон акции, со значением "Скидка: %DISCOUNT% на всё!". Замените подстроку "%DISCOUNT%" на строку "25%" с помощью метода replace() и сохраните результат в переменную promoBannerText. Выведите promoBannerText в консоль.',
     variableNamingTip: {
       recommendedName: 'promoBannerText',
+      meaning: 'итоговый текст баннера акции с подставленной скидкой',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Имя promoBannerText точно передает назначение баннера акции.'
+      why: 'Метод .replace(search, replacement) находит совпадение и заменяет его новым фрагментом.'
     },
     syntaxTags: ['.replace()', 'подстановка в шаблон', 'замена подстроки'],
     initialCode: `// Задача 5.9: Метод .replace()
-// 1. Создайте const bannerTemplate = "Скидка: %DISCOUNT% на всё!";
-// 2. Замените плейсхолдер: const promoBannerText = bannerTemplate.replace("%DISCOUNT%", "25%");
-// 3. Выведите: console.log(promoBannerText);
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const bannerTemplate = "Скидка: %DISCOUNT% на всё!";
@@ -476,7 +437,7 @@ console.log(promoBannerText);`,
           return {
             passed: hasRep,
             actual: hasRep ? '.replace() применен' : '.replace("%DISCOUNT%", "25%") не найден',
-            message: hasRep ? 'Замена выполнена' : 'Вызовите bannerTemplate.replace("%DISCOUNT%", "25%")'
+            message: hasRep ? 'Замена выполнена' : 'Вызовите метод replace("%DISCOUNT%", "25%")'
           };
         }
       },
@@ -498,26 +459,20 @@ console.log(promoBannerText);`,
   {
     id: 't5-10',
     topicId: 5,
-    number: 10,
+    number: 5,
     title: 'Очистка пробелов через .trim() и парсинг тегов через .split()',
     frontendContext: '🧹 Обработка инпутов формы: очистка и превращение в массив',
     frontendScenario: 'Пользователь ввел промокод со случайными пробелами по краям ("  PROMO2026  "), а теги статьи перечислил через запятую ("react, vue, svelte").',
-    description: 'Очистите строку rawPromo = "  PROMO2026  " методом .trim(). Разбейте строку rawTags = "react, vue, svelte" методом .split(", "). Выведите: "Промокод:", cleanedPromo, "Теги:", tagsList.',
+    description: 'Создайте переменную rawPromo, которая обозначает введенный промокод со случайными пробелами, со значением "  PROMO2026  ", и переменную rawTags, которая обозначает теги статьи, со значением "react, vue, svelte". Очистите промокод от краевых пробелов методом trim() и сохраните в cleanedPromo. Разбейте строку тегов на массив по разделителю ", " методом split() и сохраните в tagsList. Выведите в консоль: "Промокод:", cleanedPromo, "Теги:", tagsList.',
     variableNamingTip: {
       recommendedName: 'cleanedPromo / tagsList',
+      meaning: 'очищенный от пробелов промокод и массив полученных тегов',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Слово cleaned обозначает очищенную строку, а суффикс List или Array указывает на массив после .split().'
+      why: 'Метод .trim() удаляет пробельные символы с обоих концов строки, а .split(разделитель) разбивает строку в массив.'
     },
     syntaxTags: ['.trim()', '.split()', 'очистка инпутов'],
     initialCode: `// Задача 5.10: Методы .trim() и .split()
-// 1. Создайте const rawPromo = "  PROMO2026  ";
-// 2. Создайте const rawTags = "react, vue, svelte";
-// 3. Очистите пробелы: const cleanedPromo = rawPromo.trim();
-// 4. Разбейте на массив: const tagsList = rawTags.split(", ");
-// 5. Выведите: "Промокод:", cleanedPromo, "Теги:", tagsList
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const rawPromo = "  PROMO2026  ";
@@ -539,7 +494,7 @@ console.log("Промокод:", cleanedPromo, "Теги:", tagsList);`,
           return {
             passed: ok,
             actual: ok ? 'Оба метода применены' : 'Методы .trim() или .split(", ") не найдены',
-            message: ok ? 'Методы применены корректно' : 'Используйте rawPromo.trim() и rawTags.split(", ")'
+            message: ok ? 'Методы применены корректно' : 'Используйте методы trim() и split(", ")'
           };
         }
       },

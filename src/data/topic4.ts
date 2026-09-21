@@ -8,22 +8,16 @@ export const topic4Tasks: Task[] = [
     title: 'Итоговый расчет стоимости корзины со скидкой',
     frontendContext: '🛍️ Оформление заказа (Checkout Total)',
     frontendScenario: 'Покупатель оформляет заказ из 3 товаров по цене 500 рублей каждый, и у него есть промокод на скидку 200 рублей.',
-    description: 'Создайте itemPrice = 500, quantity = 3, discount = 200. Посчитайте totalPrice = itemPrice * quantity - discount; и выведите: "Итого к оплате:", totalPrice, "руб".',
+    description: 'Создайте переменную itemPrice, которая обозначает цену одного товара, со значением 500, переменную quantity, которая обозначает количество купленных единиц, со значением 3, и переменную discount, которая обозначает скидку по купону, со значением 200. Посчитайте итоговую стоимость заказа в переменной totalPrice по формуле: цена умножить на количество минус скидка. Выведите в консоль: "Итого к оплате:", totalPrice, "руб".',
     variableNamingTip: {
       recommendedName: 'totalPrice',
+      meaning: 'итоговая стоимость заказа с учетом количества и скидки',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Слово total в e-commerce интерфейсах всегда обозначает итоговую сумму чека. Исходные данные и результат неизменны — пишем const.'
+      why: 'Слово total в e-commerce интерфейсах всегда обозначает итоговую сумму чека.'
     },
-    syntaxTags: ['арифметика: *, -', 'приоритет операторов', 'const'],
+    syntaxTags: ['арифметика: *, -', 'приоритет операторов', 'camelCase'],
     initialCode: `// Задача 4.1: Расчет чекаута
-// 1. Создайте const itemPrice = 500;
-// 2. Создайте const quantity = 3;
-// 3. Создайте const discount = 200;
-// 4. Посчитайте: const totalPrice = itemPrice * quantity - discount;
-// 5. Выведите: "Итого к оплате:", totalPrice, "руб"
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const itemPrice = 500;
@@ -37,13 +31,13 @@ console.log("Итого к оплате:", totalPrice, "руб");`,
       {
         id: 't4-1-c1',
         title: 'Объявление переменных и формулы totalPrice',
-        expected: 'totalPrice = itemPrice * quantity - discount',
+        expected: 'totalPrice с умножением и вычитанием скидки',
         validate: (_, code) => {
           const hasFormula = /itemPrice\s*\*\s*quantity\s*-\s*discount/.test(code);
           return {
             passed: hasFormula,
             actual: hasFormula ? 'Формула найдена' : 'Формула расчета не обнаружена',
-            message: hasFormula ? 'Математическое выражение верно' : 'Напишите: const totalPrice = itemPrice * quantity - discount;'
+            message: hasFormula ? 'Математическое выражение верно' : 'Вычислите totalPrice по формуле itemPrice * quantity - discount'
           };
         }
       },
@@ -69,20 +63,16 @@ console.log("Итого к оплате:", totalPrice, "руб");`,
     title: 'Зебра-подсветка таблицы через остаток от деления (%)',
     frontendContext: '📊 Таблицы данных: чередование цветов строк (Zebra striping)',
     frontendScenario: 'Чтобы сделать длинную таблицу заказов читаемой, каждую четную строку окрашивают серым цветом. Четность проверяют через остаток от деления на 2.',
-    description: 'Для rowIndex = 4 вычислите остаток remainder = rowIndex % 2;. Выведите: "Индекс:", rowIndex, "Остаток:", remainder.',
+    description: 'Создайте переменную rowIndex, которая обозначает порядковый индекс строки таблицы, со значением 4. Вычислите остаток от деления индекса строки на 2 с помощью оператора % и сохраните результат в переменную remainder. Выведите в консоль: "Индекс:", rowIndex, "Остаток:", remainder.',
     variableNamingTip: {
-      recommendedName: 'rowIndex / isEvenRow',
+      recommendedName: 'rowIndex / remainder',
+      meaning: 'индекс строки таблицы и остаток от деления для проверки четности',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Индекс строки называют rowIndex. Остаток от деления — remainder или mod. Если remainder === 0, строка четная.'
+      why: 'Оператор % возвращает остаток от деления. Если remainder равен 0, индекс четный.'
     },
     syntaxTags: ['остаток от деления %', 'четность', 'camelCase'],
     initialCode: `// Задача 4.2: Чередование строк таблицы
-// 1. Создайте const rowIndex = 4;
-// 2. Вычислите остаток: const remainder = rowIndex % 2;
-// 3. Выведите: "Индекс:", rowIndex, "Остаток:", remainder
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const rowIndex = 4;
@@ -100,7 +90,7 @@ console.log("Индекс:", rowIndex, "Остаток:", remainder);`,
           return {
             passed: hasMod,
             actual: hasMod ? 'Оператор % применен' : 'Оператор % не найден',
-            message: hasMod ? 'Операция остатка верна' : 'Напишите: const remainder = rowIndex % 2;'
+            message: hasMod ? 'Операция остатка верна' : 'Вычислите остаток от деления rowIndex % 2'
           };
         }
       },
@@ -126,19 +116,16 @@ console.log("Индекс:", rowIndex, "Остаток:", remainder);`,
     title: 'Возведение в степень через современный оператор **',
     frontendContext: '🎨 Генерация цветовой палитры (8 бит = 256 градаций)',
     frontendScenario: 'В компьютерной графике каждый канал цвета (RGB) кодируется 8 битами. Число возможных оттенков равно 2 в степени 8.',
-    description: 'Возведите число 2 в степень 8 оператором **. Сохраните в colorShadesCount и выведите: "Число градаций цвета:", colorShadesCount.',
+    description: 'Создайте переменную colorShadesCount, которая обозначает количество возможных градаций цвета, и запишите в нее результат возведения числа 2 в степень 8 с помощью оператора **. Выведите в консоль: "Число градаций цвета:", colorShadesCount.',
     variableNamingTip: {
       recommendedName: 'colorShadesCount',
+      meaning: 'число градаций цвета в 8-битном канале',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'В современном JS возведение в степень записывается двумя звездочками: 2 ** 8 (вместо устаревшего Math.pow(2, 8)).'
+      why: 'В современном JavaScript возведение в степень записывается двумя звездочками (**).'
     },
     syntaxTags: ['оператор **', 'возведение в степень', 'ES2016'],
     initialCode: `// Задача 4.3: Оператор **
-// 1. Посчитайте: const colorShadesCount = 2 ** 8;
-// 2. Выведите: "Число градаций цвета:", colorShadesCount
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const colorShadesCount = 2 ** 8;
@@ -155,7 +142,7 @@ console.log("Число градаций цвета:", colorShadesCount);`,
           return {
             passed: hasPower,
             actual: hasPower ? 'Оператор ** применен' : 'Оператор ** не найден',
-            message: hasPower ? 'Синтаксис ** корректен' : 'Напишите: const colorShadesCount = 2 ** 8;'
+            message: hasPower ? 'Синтаксис ** корректен' : 'Используйте оператор ** для возведения 2 в степень 8'
           };
         }
       },
@@ -181,21 +168,16 @@ console.log("Число градаций цвета:", colorShadesCount);`,
     title: 'Счётчик лайков: разница между a++ и ++a',
     frontendContext: '❤️ Интерактивные счетчики социальных реакций',
     frontendScenario: 'Постфиксный a++ сначала возвращает старое значение, а префиксный ++a сразу инкрементирует и возвращает новое. Эта разница критична при вызове коллбэков.',
-    description: 'Объявите let likesCount = 10;. Присвойте const first = likesCount++; и const second = ++likesCount;. Выведите: first, second, likesCount.',
+    description: 'Создайте переменную likesCount, которая обозначает счетчик отметок "нравится", с начальным числовым значением 10. Создайте переменную first, в которую запишите результат постфиксного инкремента likesCount++. Затем создайте переменную second, в которую запишите результат префиксного инкремента ++likesCount. Выведите в консоль через запятую значения всех трех переменных: first, second, likesCount.',
     variableNamingTip: {
-      recommendedName: 'likesCount',
+      recommendedName: 'likesCount / first / second',
+      meaning: 'счетчик лайков и промежуточные результаты постфиксного и префиксного инкремента',
       style: 'camelCase',
-      keyword: 'let',
-      why: 'likesCount объявляется через let, так как инкремент меняет само значение переменной. Суффикс Count указывает на целое число счетчика.'
+      why: 'likesCount объявляется через let, так как инкремент перезаписывает значение переменной.'
     },
     syntaxTags: ['постфиксный a++', 'префиксный ++a', 'инкремент'],
     initialCode: `// Задача 4.4: Префиксный и постфиксный инкремент
-// 1. Создайте let likesCount = 10;
-// 2. Создайте const first = likesCount++;
-// 3. Создайте const second = ++likesCount;
-// 4. Выведите все три переменные через запятую: console.log(first, second, likesCount);
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `let likesCount = 10;
@@ -208,7 +190,7 @@ console.log(first, second, likesCount);`,
       {
         id: 't4-4-c1',
         title: 'Использование likesCount++ и ++likesCount',
-        expected: 'Обе формы инкремента в коде',
+        expected: 'Применение обеих форм инкремента',
         validate: (_, code) => {
           const hasPost = /likesCount\+\+/.test(code);
           const hasPre = /\+\+likesCount/.test(code);
@@ -216,7 +198,7 @@ console.log(first, second, likesCount);`,
           return {
             passed: ok,
             actual: ok ? 'Обе формы найдены' : 'Проверьте использование likesCount++ и ++likesCount',
-            message: ok ? 'Инкременты применены' : 'Создайте const first = likesCount++; const second = ++likesCount;'
+            message: ok ? 'Инкременты применены' : 'Примените постфиксный likesCount++ и префиксный ++likesCount'
           };
         }
       },
@@ -242,22 +224,16 @@ console.log(first, second, likesCount);`,
     title: 'Операции списания баланса и бонусов через -= и +=',
     frontendContext: '💳 Кошелек пользователя и программа лояльности',
     frontendScenario: 'При покупке баланс кошелька уменьшается на стоимость заказа (balance -= 350), а кэшбэк-баллы начисляются (bonusPoints += 50).',
-    description: 'Объявите let balance = 1000; и let bonusPoints = 50;. Уменьшите balance на 350 с помощью -=. Увеличьте bonusPoints на 50 с помощью +=. Выведите: "Баланс:", balance, "Бонусы:", bonusPoints.',
+    description: 'Создайте переменную balance, которая обозначает баланс средств пользователя, с начальным значением 1000, и переменную bonusPoints, которая обозначает баллы программы лояльности, со значением 50. Уменьшите balance на 350 с помощью сокращенного оператора вычитания -=. Увеличьте bonusPoints на 50 с помощью сокращенного оператора сложения +=. Выведите в консоль: "Баланс:", balance, "Бонусы:", bonusPoints.',
     variableNamingTip: {
       recommendedName: 'balance / bonusPoints',
+      meaning: 'баланс счета и баллы лояльности пользователя',
       style: 'camelCase',
-      keyword: 'let',
-      why: 'Переменные balance и bonusPoints изменяются на месте — объявляем через let.'
+      why: 'Переменные balance и bonusPoints изменяются на месте — для них необходимо использовать подходящее ключевое слово.'
     },
-    syntaxTags: ['сокращенное присваивание +=', '-=', 'let'],
+    syntaxTags: ['сокращенное присваивание +=', '-=', 'переприсваивание'],
     initialCode: `// Задача 4.5: Операторы += и -=
-// 1. Создайте let balance = 1000;
-// 2. Создайте let bonusPoints = 50;
-// 3. Вычтите 350 из баланса: balance -= 350;
-// 4. Добавьте 50 к бонусам: bonusPoints += 50;
-// 5. Выведите: "Баланс:", balance, "Бонусы:", bonusPoints
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `let balance = 1000;
@@ -271,7 +247,7 @@ console.log("Баланс:", balance, "Бонусы:", bonusPoints);`,
       {
         id: 't4-5-c1',
         title: 'Использование операторов -= и +=',
-        expected: 'balance -= 350 и bonusPoints += 50',
+        expected: 'Операторы -= 350 и += 50',
         validate: (_, code) => {
           const hasSub = /balance\s*-=\s*350/.test(code);
           const hasAdd = /bonusPoints\s*\+=\s*50/.test(code);
@@ -279,7 +255,7 @@ console.log("Баланс:", balance, "Бонусы:", bonusPoints);`,
           return {
             passed: ok,
             actual: ok ? 'Оба оператора найдены' : 'Проверьте balance -= 350 и bonusPoints += 50',
-            message: ok ? 'Сокращенные операторы применены' : 'Используйте -= и +='
+            message: ok ? 'Сокращенные операторы применены' : 'Используйте операторы -= 350 и += 50'
           };
         }
       },
@@ -305,21 +281,16 @@ console.log("Баланс:", balance, "Бонусы:", bonusPoints);`,
     title: 'Расчет страниц пагинации каталога через Math.ceil()',
     frontendContext: '📑 Пагинация каталога интернет-магазина (Pagination)',
     frontendScenario: 'Если в каталоге 25 товаров, а на одной странице показывается по 10 товаров, необходимо 3 страницы (2 полных и 1 с 5 товарами). Округлять нужно строго ВВЕРХ.',
-    description: 'Дано totalItems = 25 и itemsPerPage = 10. Вычислите totalPages с помощью Math.ceil(totalItems / itemsPerPage); и выведите: "Всего страниц:", totalPages.',
+    description: 'Создайте переменную totalItems, которая обозначает общее число товаров в каталоге, со значением 25, и переменную itemsPerPage, которая обозначает количество товаров на одной странице, со значением 10. Рассчитайте общее число страниц пагинации в переменной totalPages, разделив totalItems на itemsPerPage и округлив результат строго вверх с помощью метода Math.ceil(). Выведите в консоль: "Всего страниц:", totalPages.',
     variableNamingTip: {
       recommendedName: 'totalPages',
+      meaning: 'общее количество страниц пагинатора каталога',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Слово totalPages однозначно описывает общее количество страниц пагинатора. Math.ceil округляет любое нецелое число в большую сторону (2.5 -> 3).'
+      why: 'Math.ceil() округляет число в большую сторону (2.5 -> 3), гарантируя, что остаток товаров не потеряется.'
     },
     syntaxTags: ['Math.ceil()', 'пагинация', 'округление вверх'],
     initialCode: `// Задача 4.6: Округление вверх Math.ceil
-// 1. Создайте const totalItems = 25;
-// 2. Создайте const itemsPerPage = 10;
-// 3. Посчитайте: const totalPages = Math.ceil(totalItems / itemsPerPage);
-// 4. Выведите: "Всего страниц:", totalPages
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const totalItems = 25;
@@ -332,13 +303,13 @@ console.log("Всего страниц:", totalPages);`,
       {
         id: 't4-6-c1',
         title: 'Использование метода Math.ceil',
-        expected: 'Math.ceil(totalItems / itemsPerPage)',
+        expected: 'Math.ceil с делением totalItems на itemsPerPage',
         validate: (_, code) => {
           const hasCeil = /Math\s*\.\s*ceil\s*\(/.test(code);
           return {
             passed: hasCeil,
             actual: hasCeil ? 'Math.ceil применен' : 'Math.ceil не найден',
-            message: hasCeil ? 'Округление вверх реализовано' : 'Напишите: const totalPages = Math.ceil(totalItems / itemsPerPage);'
+            message: hasCeil ? 'Округление вверх реализовано' : 'Примените Math.ceil к результату деления'
           };
         }
       },
@@ -364,20 +335,16 @@ console.log("Всего страниц:", totalPages);`,
     title: 'Сравнение методов Math: round, floor и ceil на цене товара',
     frontendContext: '🏷️ Ценообразование и маркетинг (Округление цен)',
     frontendScenario: 'Товар стоит 199.75 руб. В зависимости от бизнес-правил фронтенд округляет цену математически (round), в меньшую (floor) или большую (ceil) сторону.',
-    description: 'Для price = 199.75 выведите в одну строку через запятую три значения: Math.round(price), Math.floor(price), Math.ceil(price).',
+    description: 'Создайте переменную price, которая обозначает точную цену товара, со значением 199.75. Выведите в консоль в одну строку через запятую три разных варианта округления этой цены: математическое через Math.round(), строго вниз через Math.floor() и строго вверх через Math.ceil().',
     variableNamingTip: {
-      recommendedName: 'rawPrice',
+      recommendedName: 'price',
+      meaning: 'исходная цена товара с копейками',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Исходную неокругленную цену удобно называть rawPrice (сырая цена).'
+      why: 'В JavaScript объект Math предоставляет методы round (математическое округление), floor (вниз) и ceil (вверх).'
     },
     syntaxTags: ['Math.round()', 'Math.floor()', 'Math.ceil()'],
     initialCode: `// Задача 4.7: Методы округления
-// 1. Создайте const price = 199.75;
-// 2. Выведите в одном console.log через запятую:
-//    Math.round(price), Math.floor(price), Math.ceil(price)
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const price = 199.75;
@@ -388,7 +355,7 @@ console.log(Math.round(price), Math.floor(price), Math.ceil(price));`,
       {
         id: 't4-7-c1',
         title: 'Вызов всех трех методов Math: round, floor, ceil',
-        expected: 'Math.round, Math.floor, Math.ceil в коде',
+        expected: 'Использование методов round, floor, ceil',
         validate: (_, code) => {
           const hasR = /Math\s*\.\s*round/.test(code);
           const hasF = /Math\s*\.\s*floor/.test(code);
@@ -397,7 +364,7 @@ console.log(Math.round(price), Math.floor(price), Math.ceil(price));`,
           return {
             passed: ok,
             actual: ok ? 'Все 3 метода присутствуют' : 'Не все 3 метода Math вызваны',
-            message: ok ? 'Методы применены' : 'Вызовите Math.round(price), Math.floor(price), Math.ceil(price)'
+            message: ok ? 'Методы применены' : 'Примените к переменной price методы Math.round, Math.floor и Math.ceil'
           };
         }
       },
@@ -423,20 +390,16 @@ console.log(Math.round(price), Math.floor(price), Math.ceil(price));`,
     title: 'Длина кругового SVG прогресс-бара через Math.PI',
     frontendContext: '🎨 SVG анимация кругового индикатора (Circular Progress)',
     frontendScenario: 'Чтобы анимировать круговой индикатор загрузки файла через CSS stroke-dasharray, нужно рассчитать длину окружности: 2 * Math.PI * radius.',
-    description: 'Для radius = 50 вычислите округленную длину progressCircumference = Math.round(2 * Math.PI * radius); и выведите: "Длина индикатора:", progressCircumference.',
+    description: 'Создайте переменную radius, которая обозначает геометрический радиус индикатора, со значением 50. Вычислите длину окружности по формуле 2 * Math.PI * radius, округлите результат до ближайшего целого через Math.round() и сохраните в переменную progressCircumference. Выведите в консоль: "Длина индикатора:", progressCircumference.',
     variableNamingTip: {
-      recommendedName: 'progressCircumference / circleRadius',
+      recommendedName: 'progressCircumference / radius',
+      meaning: 'длина окружности и радиус кругового индикатора',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Circumference — геометрический термин длины окружности. Math.PI — стандартная константа числа Пи (3.14159...).'
+      why: 'Circumference — длина окружности. Константа Math.PI содержит точное математическое число Пи.'
     },
     syntaxTags: ['Math.PI', 'Math.round()', 'геометрия SVG'],
     initialCode: `// Задача 4.8: Константа Math.PI
-// 1. Создайте const radius = 50;
-// 2. Вычислите: const progressCircumference = Math.round(2 * Math.PI * radius);
-// 3. Выведите: "Длина индикатора:", progressCircumference
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const radius = 50;
@@ -448,13 +411,13 @@ console.log("Длина индикатора:", progressCircumference);`,
       {
         id: 't4-8-c1',
         title: 'Использование константы Math.PI',
-        expected: 'Math.PI в формуле',
+        expected: 'Math.PI в формуле длины окружности',
         validate: (_, code) => {
           const hasPi = /Math\s*\.\s*PI/.test(code);
           return {
             passed: hasPi,
             actual: hasPi ? 'Math.PI найдена' : 'Math.PI не найдена',
-            message: hasPi ? 'Число Пи применено' : 'Используйте Math.PI в формуле'
+            message: hasPi ? 'Число Пи применено' : 'Используйте Math.PI в формуле длины окружности'
           };
         }
       },
@@ -480,21 +443,16 @@ console.log("Длина индикатора:", progressCircumference);`,
     title: 'Генерация 4-значного PIN-кода подтверждения',
     frontendContext: '🔐 Двухфакторная аутентификация (2FA SMS Code)',
     frontendScenario: 'Формула из конспекта МФТИ (стр. 36): случайное целое число в диапазоне от min до max генерируется через Math.floor(Math.random() * (max - min + 1)) + min.',
-    description: 'Для min = 1000 и max = 9999 сгенерируйте generatedPin. Выведите: "PIN код:", generatedPin, "Валиден:", generatedPin >= 1000 && generatedPin <= 9999.',
+    description: 'Создайте переменную min со значением 1000 и переменную max со значением 9999, которые обозначают границы четырехзначного PIN-кода. Сгенерируйте случайный код в переменной generatedPin с помощью формулы со случайным числом Math.random(), масштабированным на диапазон (max - min + 1), округленным вниз через Math.floor() и смещенным на min. Выведите в консоль: "PIN код:", generatedPin, "Валиден:", generatedPin >= 1000 && generatedPin <= 9999.',
     variableNamingTip: {
       recommendedName: 'generatedPin',
+      meaning: 'сгенерированный четырехзначный PIN-код',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Слово generated подчеркивает, что число создано генератором случайных чисел.'
+      why: 'Слово generated подчеркивает, что число создано программным генератором случайных чисел.'
     },
-    syntaxTags: ['Math.random()', 'Math.floor()', 'формула диапазона чисел'],
+    syntaxTags: ['Math.random()', 'Math.floor()', 'диапазон чисел'],
     initialCode: `// Задача 4.9: Случайный PIN-код (от 1000 до 9999)
-// 1. Создайте const min = 1000;
-// 2. Создайте const max = 9999;
-// 3. Вычислите: const generatedPin = Math.floor(Math.random() * (max - min + 1)) + min;
-// 4. Выведите: "PIN код:", generatedPin, "Валиден:", generatedPin >= 1000 && generatedPin <= 9999
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const min = 1000;
@@ -507,7 +465,7 @@ console.log("PIN код:", generatedPin, "Валиден:", generatedPin >= 1000
       {
         id: 't4-9-c1',
         title: 'Использование Math.random и Math.floor',
-        expected: 'Math.floor(Math.random() * ...)',
+        expected: 'Генерация числа через Math.floor и Math.random',
         validate: (_, code) => {
           const hasRand = /Math\s*\.\s*random\s*\(/.test(code);
           const hasFl = /Math\s*\.\s*floor\s*\(/.test(code);
@@ -515,7 +473,7 @@ console.log("PIN код:", generatedPin, "Валиден:", generatedPin >= 1000
           return {
             passed: ok,
             actual: ok ? 'Формула случайных чисел применена' : 'Math.random или Math.floor не найдены',
-            message: ok ? 'Синтаксис формулы верен' : 'Примените формулу генерации диапазона'
+            message: ok ? 'Синтаксис формулы верен' : 'Примените формулу генерации диапазона через Math.floor и Math.random'
           };
         }
       },
@@ -541,22 +499,16 @@ console.log("PIN код:", generatedPin, "Валиден:", generatedPin >= 1000
     title: 'Парсинг ввода из readline и расчет конверсии продаж',
     frontendContext: '💻 CLI утилиты и строковый ввод пользователя',
     frontendScenario: 'В консольных скриптах модуль readline (стр. 24–25, 30 методички) считывает строки. Чтобы посчитать процент конверсии, строковый ввод преобразуют в числа унарным плюсом +.',
-    description: 'Даны строки rawVisitors = "500" и rawBuyers = "25". Преобразуйте их в числа через унарный плюс +, посчитайте процент конверсии conversionRate = (buyers / visitors) * 100; и выведите: "Конверсия сайта:", conversionRate + "%".',
+    description: 'Создайте строковые переменные rawVisitors со значением "500" и rawBuyers со значением "25", которые обозначают текстовые данные о количестве посетителей и покупателей. Преобразуйте обе строки в числа через унарный плюс (+) и сохраните в переменные visitors и buyers. Рассчитайте процент конверсии в переменной conversionRate по формуле: (buyers / visitors) * 100. Выведите в консоль: "Конверсия сайта:", conversionRate + "%".',
     variableNamingTip: {
       recommendedName: 'conversionRate',
+      meaning: 'процентная конверсия посетителей в покупатели',
       style: 'camelCase',
-      keyword: 'const',
-      why: 'Слово rate в продуктовой аналитике всегда означает процентную ставку или коэффициент (conversionRate, bounceRate).'
+      why: 'Слово rate в продуктовой аналитике означает коэффициент или процентную ставку.'
     },
-    syntaxTags: ['унарный плюс +', 'readline концепция', 'расчет процентов'],
+    syntaxTags: ['унарный плюс +', 'приведение типов', 'расчет процентов'],
     initialCode: `// Задача 4.10: Приведение ввода и расчет конверсии
-// 1. Создайте const rawVisitors = "500";
-// 2. Создайте const rawBuyers = "25";
-// 3. Приведите к числам: const visitors = +rawVisitors; const buyers = +rawBuyers;
-// 4. Посчитайте: const conversionRate = (buyers / visitors) * 100;
-// 5. Выведите: "Конверсия сайта:", conversionRate + "%"
-
-// Напишите ваш код ниже:
+// Напишите ваш код решения ниже:
 
 `,
     solutionCode: `const rawVisitors = "500";
@@ -571,13 +523,13 @@ console.log("Конверсия сайта:", conversionRate + "%");`,
       {
         id: 't4-10-c1',
         title: 'Приведение к числам через унарный плюс +',
-        expected: '+rawVisitors и +rawBuyers',
+        expected: 'Преобразование +rawVisitors и +rawBuyers',
         validate: (_, code) => {
           const hasUnary = /\+\s*rawVisitors/.test(code) && /\+\s*rawBuyers/.test(code);
           return {
             passed: hasUnary,
             actual: hasUnary ? 'Унарные плюсы найдены' : 'Унарное приведение + не найдено',
-            message: hasUnary ? 'Строки приведены к числам' : 'Используйте +rawVisitors и +rawBuyers'
+            message: hasUnary ? 'Строки приведены к числам' : 'Используйте унарный плюс (+) перед rawVisitors и rawBuyers'
           };
         }
       },
