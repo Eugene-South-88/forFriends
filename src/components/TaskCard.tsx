@@ -252,15 +252,15 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             </button>
           </div>
 
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setShowSolution(!showSolution)}
-              className="px-3 py-2 border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-lg text-sm font-medium flex items-center gap-1.5 transition-colors"
-            >
-              {showSolution ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-              <span>{showSolution ? 'Скрыть разбор' : 'Показать разбор и решение'}</span>
-            </button>
-          </div>
+          {/*<div className="flex items-center gap-2">*/}
+          {/*  <button*/}
+          {/*    onClick={() => setShowSolution(!showSolution)}*/}
+          {/*    className="px-3 py-2 border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-lg text-sm font-medium flex items-center gap-1.5 transition-colors"*/}
+          {/*  >*/}
+          {/*    {showSolution ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}*/}
+          {/*    <span>{showSolution ? 'Скрыть разбор' : 'Показать разбор и решение'}</span>*/}
+          {/*  </button>*/}
+          {/*</div>*/}
         </div>
 
         {/* Test Results & Output Panel */}
