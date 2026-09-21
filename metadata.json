@@ -1,0 +1,6 @@
+{
+  "name": "Тренажер JavaScript: Основы разработки",
+  "description": "50 практических задач по основам JavaScript для фронтенд-разработчиков с разбором синтаксиса, правил именования переменных и интерактивным запуском кода.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
