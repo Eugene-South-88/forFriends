@@ -59,3 +59,20 @@ export interface StudentProgressData {
   lastUpdated: string;
 }
 
+export interface MentorFeedback {
+  studentId: string;
+  notes: Record<string, string>; // taskId -> mentor feedback note
+  generalComment?: string;
+  updatedAt: string;
+}
+
+export interface ReviewedStudentItem {
+  id: string;
+  name: string;
+  avatarColor: string;
+  lastUpdated: string;
+  completedCount: number;
+  data: StudentProgressData;
+  feedback?: MentorFeedback;
+}
+

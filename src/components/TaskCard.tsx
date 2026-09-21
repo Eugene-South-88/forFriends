@@ -7,14 +7,11 @@ import {
   CheckCircle2,
   XCircle,
   Circle,
-  Eye,
-  EyeOff,
   Terminal,
   Sparkles,
   Copy,
   Check,
   Code2,
-  CheckSquare,
   AlertCircle
 } from 'lucide-react';
 
@@ -36,7 +33,6 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   const [code, setCode] = useState<string>(savedCode !== undefined ? savedCode : task.initialCode);
   const [evaluation, setEvaluation] = useState<TaskEvaluationResult | null>(null);
   const [isRunning, setIsRunning] = useState<boolean>(false);
-  const [showSolution, setShowSolution] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<'tests' | 'console'>('tests');
 
@@ -87,10 +83,6 @@ export const TaskCard: React.FC<TaskCardProps> = ({
     navigator.clipboard.writeText(code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleLoadSolution = () => {
-    handleCodeChange(task.solutionCode);
   };
 
   return (
@@ -251,16 +243,6 @@ export const TaskCard: React.FC<TaskCardProps> = ({
               <span className="hidden sm:inline">Сбросить</span>
             </button>
           </div>
-
-          {/*<div className="flex items-center gap-2">*/}
-          {/*  <button*/}
-          {/*    onClick={() => setShowSolution(!showSolution)}*/}
-          {/*    className="px-3 py-2 border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-lg text-sm font-medium flex items-center gap-1.5 transition-colors"*/}
-          {/*  >*/}
-          {/*    {showSolution ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}*/}
-          {/*    <span>{showSolution ? 'Скрыть разбор' : 'Показать разбор и решение'}</span>*/}
-          {/*  </button>*/}
-          {/*</div>*/}
         </div>
 
         {/* Test Results & Output Panel */}
@@ -405,40 +387,6 @@ export const TaskCard: React.FC<TaskCardProps> = ({
                 )}
               </div>
             )}
-          </div>
-        )}
-
-        {/* Solution & Explanation Modal/Block */}
-        {showSolution && (
-          <div className="p-4 bg-emerald-50/80 border border-emerald-200 rounded-lg space-y-3 mt-3 animate-fadeIn">
-            <div className="flex items-center justify-between flex-wrap gap-2">
-              <span className="text-sm font-bold text-emerald-950 flex items-center gap-1.5">
-                <CheckSquare className="w-4 h-4 text-emerald-700" />
-                Эталонное решение с разбором:
-              </span>
-              <button
-                onClick={handleLoadSolution}
-                className="text-xs font-semibold text-emerald-800 hover:text-emerald-950 bg-emerald-100 hover:bg-emerald-200 px-2.5 py-1 rounded transition-colors"
-              >
-                Вставить решение в редактор
-              </button>
-            </div>
-
-            <pre className="p-3.5 bg-slate-900 text-emerald-300 rounded-md font-mono text-xs overflow-x-auto">
-              <code>{task.solutionCode}</code>
-            </pre>
-
-            <div className="text-xs sm:text-sm text-emerald-900 leading-relaxed">
-              <strong>Почему такое решение: </strong>
-              {task.explanation}
-            </div>
-
-            <div className="text-xs text-slate-600 bg-white/70 p-2.5 rounded border border-emerald-200 font-mono">
-              <strong>Ожидаемый вывод в терминале:</strong>
-              <div className="text-slate-800 mt-1 whitespace-pre-wrap">
-                {task.expectedOutput}
-              </div>
-            </div>
           </div>
         )}
       </div>

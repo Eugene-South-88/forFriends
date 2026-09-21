@@ -3,12 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://eugene-south-88.github.io/forFriends",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",
+    "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit"
   },
@@ -19,6 +20,7 @@
     "dotenv": "^17.2.3",
     "express": "^4.21.2",
     "lucide-react": "^0.546.0",
+    "lz-string": "^1.5.0",
     "motion": "^12.23.24",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
@@ -26,6 +28,7 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
+    "@types/lz-string": "^1.5.0",
     "@types/node": "^22.14.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
